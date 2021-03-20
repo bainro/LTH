@@ -1,3 +1,7 @@
+This is not my work, this is a lazy man's fork of the repo here: https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch
+
+I've added some features though, not just a simple copy and paste.
+
 # Lottery Ticket Hypothesis in Pytorch 
 [![Made With python 3.7](https://img.shields.io/badge/Made%20with-Python%203.7-brightgreen)]() [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)]() [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)]() 
 
