@@ -74,51 +74,6 @@ python3 main.py --prune_type=lt --arch_type=fc1 --dataset=mnist --prune_percent=
 
 Kindly [raise an issue](https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch/issues) if you have any problem with the instructions. 
 
-
-## Datasets and Architectures that were already tested
-
-|              | fc1                | LeNet5                | AlexNet                | VGG16                | Resnet18                 |
-|--------------|:------------------:|:---------------------:|:----------------------:|:--------------------:|:------------------------:|
-| MNIST        | :heavy_check_mark: |  :heavy_check_mark:   |   :heavy_check_mark:   |  :heavy_check_mark:  |  	:heavy_check_mark:	   |
-| CIFAR10      | :heavy_check_mark: |  :heavy_check_mark:   |   :heavy_check_mark:   |  :heavy_check_mark:  |	:heavy_check_mark:	   |
-| FashionMNIST | :heavy_check_mark: |  :heavy_check_mark:   |   :heavy_check_mark:   |  :heavy_check_mark:  |	:heavy_check_mark:	   |
-| CIFAR100     | :heavy_check_mark: |  :heavy_check_mark:   |   :heavy_check_mark:   |  :heavy_check_mark:  |	:heavy_check_mark:     |
-
-
-## Repository Structure
-```
-Lottery-Ticket-Hypothesis-in-Pytorch
-├── archs
-│   ├── cifar10
-│   │   ├── AlexNet.py
-│   │   ├── densenet.py
-│   │   ├── fc1.py
-│   │   ├── LeNet5.py
-│   │   ├── resnet.py
-│   │   └── vgg.py
-│   ├── cifar100
-│   │   ├── AlexNet.py
-│   │   ├── fc1.py
-│   │   ├── LeNet5.py
-│   │   ├── resnet.py
-│   │   └── vgg.py
-│   └── mnist
-│       ├── AlexNet.py
-│       ├── fc1.py
-│       ├── LeNet5.py
-│       ├── resnet.py
-│       └── vgg.py
-├── combine_plots.py
-├── dumps
-├── main.py
-├── plots
-├── README.md
-├── requirements.txt
-├── saves
-└── utils.py
-
-```
-
 ## Interesting papers that are related to Lottery Ticket Hypothesis which I enjoyed 
 - [Deconstructing Lottery Tickets: Zeros, Signs, and the Supermask](https://eng.uber.com/deconstructing-lottery-tickets/)
 
