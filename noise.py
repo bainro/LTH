@@ -21,29 +21,28 @@ for trial in range(n_repeats):
     cmd = "python main.py --dataset cifar10 --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
     cmd += exp_name
     q_l.append(['/bin/bash', '-c', cmd])
+    
+for trial in range(n_repeats):
+    exp_name = "trial_" + str(trial)
+    cmd = "python main.py --dataset mnist --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
+    cmd += exp_name
+    q_l.append(['/bin/bash', '-c', cmd])
 
 done_i = None
 for i, process in enumerate(q_l):
     
-    # could break & be unefficient on other PCs
+    # will break &| be unefficient on other PCs
     if done_i == None:
         gpu_i = i % 3
         print("i: ", i)
     else:
         gpu_i = done_i % 3
         print("done_i: ", done_i)
-    
-#     if done_i < 4:
-#         gpu_i = 2
-#     elif done_i < 6:
-#         gpu_i = 1
-#     else:
-#         gpu_i = 0
+
     process[-1] += (" --gpu " + str(gpu_i) + " &>/tmp/" + str(i))
-    # for testing!!!
-    # process[-1] = "echo LOL"
+
     p = Popen(process)
-    processes.append((i%N, p))
+    processes.append((gpu_i, p))
     if len(processes) == N:
         wait = True
         while wait:
