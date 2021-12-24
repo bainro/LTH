@@ -35,6 +35,7 @@ def main(args, ITE=0):
 
     # Data Loader
     transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.1307,), (0.3081,))])
+    assert False, "Need to fix transform! Only appropriate for mnist. See main.py!!"
     if args.dataset == "mnist":
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.MNIST('../data', train=False, transform=transform)
