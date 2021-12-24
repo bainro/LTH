@@ -265,12 +265,14 @@ def train(model, train_loader, optimizer, criterion):
         train_loss.backward()
 
         # Freezing Pruned weights by making their gradients Zero
+        # https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch/issues/10
         for name, p in model.named_parameters():
-            if 'weight' in name:
-                tensor = p.data.cpu().numpy()
-                grad_tensor = p.grad.data.cpu().numpy()
-                grad_tensor = np.where(tensor < EPS, 0, grad_tensor)
-                p.grad.data = torch.from_numpy(grad_tensor).to(device)
+        if 'weight' in name:
+            tensor = p.data
+            grad_tensor = p.grad
+            grad_tensor = torch.where(tensor.abs() < EPS, torch.zeros_like(grad_tensor), grad_tensor)
+            p.grad.data = grad_tensor
+                
         optimizer.step()
     return train_loss.item()
 
