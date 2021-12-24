@@ -71,7 +71,7 @@ def main(args, ITE=0):
         total_elewise += torch.sum(inputs)
         #total_mean_px += torch.mean(inputs)
     #print("average px value: ", total_mean_px/len(train_loader))
-    print("average px value: ", total_elewise/len(train_loader))
+    print("average px value: ", total_elewise/len(train_loader)*(28*28))
     print("~ std: ", total_elewise/(_batch_idx*60))
     exit()
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
