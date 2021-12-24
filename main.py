@@ -66,7 +66,8 @@ def main(args, ITE=0):
         exit()
 
     train_loader = torch.utils.data.DataLoader(traindataset, batch_size=args.batch_size, shuffle=True, num_workers=0,drop_last=False)
-    
+    test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
+    '''
     ### testing whether cifar10 is getting normalized correctly
     mean = 0.0
     for images, _ in train_loader:
@@ -84,8 +85,7 @@ def main(args, ITE=0):
     
     print("mean, std: ", mean, std)
     exit()
-    
-    test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
+    '''
     
     # Importing Network Architecture
     global model
