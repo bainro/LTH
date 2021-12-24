@@ -62,7 +62,8 @@ def main(args, ITE=0):
         exit()
 
     train_loader = torch.utils.data.DataLoader(traindataset, batch_size=args.batch_size, shuffle=True, num_workers=0,drop_last=False)
-    total = 0
+    total_mean_px = 0
+    total_elewise = 0
     for _batch_idx, (inputs, _targets) in enumerate(train_loader):
         batch_size = inputs.size(0)
         print("inputs.shape: ", inputs.shape)
@@ -70,11 +71,12 @@ def main(args, ITE=0):
         #print(inputs)
         #exit()
         # print("batch_size: ", batch_size)
-        total += torch.mean(inputs)
+        total_elewise += torch.sum(inputs)
+        total_mean_px += torch.mean(inputs)
         # inputs = Variable(inputs)
         print("DONE EARLY")
-    print("average px value: ", total/len(train_loader))
-    print("std: ", total*_batch_idx/len(train_loader))
+    print("average px value: ", total_mean_px/len(train_loader))
+    print("~ std: ", total_elewise/(_batch_idx*60))
     exit()
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
     
