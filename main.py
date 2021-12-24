@@ -33,18 +33,22 @@ def main(args, ITE=0):
     reinit = True if args.prune_type=="reinit" else False
 
     # Data Loader
-    
-    transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.1307,), (0.3081,))])
-    assert args.dataset == "mnist", "This is the mean & std for just MNIST!"
-    # for cifar10/100 put in: 
-        # normalize = transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+    transform = None
     
     if args.dataset == "mnist":
+        transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize((0.1307,), (0.3081,))
+        ])
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.MNIST('../data', train=False, transform=transform)
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet
 
     elif args.dataset == "cifar10":
+        transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+        ])
         traindataset = datasets.CIFAR10('../data', train=True, download=True,transform=transform)
         testdataset = datasets.CIFAR10('../data', train=False, transform=transform)      
         from archs.cifar10 import AlexNet, LeNet5, fc1, vgg, resnet, densenet 
@@ -55,12 +59,17 @@ def main(args, ITE=0):
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet 
 
     elif args.dataset == "cifar100":
+        transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+        ])
         traindataset = datasets.CIFAR100('../data', train=True, download=True,transform=transform)
         testdataset = datasets.CIFAR100('../data', train=False, transform=transform)   
         from archs.cifar100 import AlexNet, fc1, LeNet5, vgg, resnet  
     
+    assert transform != None, "Need to implement correct transform!"
+    
     # If you want to add extra datasets paste here
-
     else:
         print("\nWrong Dataset choice \n")
         exit()
