@@ -43,7 +43,7 @@ for i, process in enumerate(queue):
             if done:
                 # need to check gpu on process cmd call
                 done_i, done_p = processes.pop(num)
-                done_i = done_i % N
+                # done_i = done_i % N
                 print("done_i: ", done_i)
                 print("done_p: ", done_p)
                 wait = False
