@@ -31,7 +31,7 @@ for i, process in enumerate(q_l):
         gpu_i = 1
     else:
         gpu_i = 0
-    process[-1] += (" --gpu " + str(gpu_i) + " &>/dev/null")
+    process[-1] += (" --gpu " + str(gpu_i) + " ")#&>/dev/null")
     p = Popen(process)
     processes.append((done_i, p))
     if len(processes) == N:
