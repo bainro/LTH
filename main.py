@@ -134,6 +134,8 @@ def main(args, ITE=0):
     # NOTE First Pruning Iteration is of No Compression
     bestacc = 0.0
     best_accuracy = 0
+    base_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/"
+    utils.checkdir(base_dir)
     ITERATION = args.prune_iterations
     comp = np.zeros(ITERATION,float)
     bestacc = np.zeros(ITERATION,float)
@@ -176,8 +178,7 @@ def main(args, ITE=0):
                 # Save Weights
                 if accuracy > best_accuracy:
                     best_accuracy = accuracy
-                    utils.checkdir(f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/")
-                    torch.save(model,f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{_ite}_model_{args.prune_type}.pth.tar")
+                    torch.save(model, base_dir + f"{_ite}_model_{args.prune_type}.pth.tar")
 
             # Training
             loss = train(model, train_loader, optimizer, criterion)
