@@ -12,7 +12,7 @@ def check_for_done(l):
 
 processes = list()
 N = 8
-queue = list()
+queue = list("echo lol", "sleep 5", "echo dblol", "sleep 5", "sleep 5", "sleep 5", "sleep 5", "echo trplol", "sleep 5", "echo duadlol")
 for process in queue:
     p = subprocess.Popen(process)
     processes.append(p)
