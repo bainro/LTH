@@ -11,13 +11,30 @@ def check_for_done(l):
     return False, False
 
 processes = list()
-N = 3
+N = 8
+n_repeats = 10
+q_l = []
 
-q_l = [['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'echo OMG']]
+# need to modulo the gpu # from done_i
+for trial in range(n_repeats):
+    exp_name = "trial_" + str(trial)
+    cmd = "python main.py --dataset cifar10 --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
+    cmd += exp_name
+    q_l.append([['/bin/bash', '-c', cmd]])
+
 queue = list(q_l)
+done_i = 0
 for i, process in enumerate(queue):
+    # could break & be unefficient on other PCs
+    if done_i < 4:
+        gpu_i = 2
+    elif done_i < 6:
+        gpu_i = 1
+    else:
+        gpu_i = 0
+    process[-1] += " --gpu " + str(gpu_i) + " &>/dev/null"
     p = Popen(process)
-    processes.append((i, p))
+    processes.append((done_i, p))
     if len(processes) == N:
         wait = True
         while wait:
@@ -26,6 +43,7 @@ for i, process in enumerate(queue):
             if done:
                 # need to check gpu on process cmd call
                 done_i, done_p = processes.pop(num)
+                done_i = done_i % N
                 print("done_i: ", done_i)
                 print("done_p: ", done_p)
                 wait = False
