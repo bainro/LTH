@@ -66,13 +66,11 @@ def main(args, ITE=0):
     for _batch_idx, (inputs, _targets) in enumerate(train_loader):
         batch_size = inputs.size(0)
         print("inputs.shape: ", inputs.shape)
-        print("batch_size: ", batch_size)
+        # print("batch_size: ", batch_size)
         total += torch.mean(inputs)
         # inputs = Variable(inputs)
         print("DONE EARLY")
-        print(_batch_idx)
-       
-    print("average px value: ", 123)
+    print("average px value: ", total/len(train_loader))
     exit()
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
     
