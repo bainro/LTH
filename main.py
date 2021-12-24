@@ -116,7 +116,7 @@ def main(args, ITE=0):
     # Copying and Saving Initial State
     initial_state_dict = copy.deepcopy(model.state_dict())
     tar_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{args.exp_name}/"
-    utils.checkdir(base_dir)
+    utils.checkdir(tar_dir)
     torch.save(model, tar_dir + f"initial_state_dict_{args.prune_type}.pth.tar")
 
     # Making Initial Mask
