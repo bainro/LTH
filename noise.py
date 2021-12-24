@@ -33,7 +33,7 @@ for i, process in enumerate(q_l):
         gpu_i = 0
     process[-1] += (" --gpu " + str(gpu_i) + " &>/tmp/" + str(i))
     # for testing!!!
-    process[-1] = "echo LOL"
+    # process[-1] = "echo LOL"
     p = Popen(process)
     processes.append((i%N, p))
     if len(processes) == N:
