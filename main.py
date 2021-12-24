@@ -62,7 +62,10 @@ def main(args, ITE=0):
         exit()
 
     train_loader = torch.utils.data.DataLoader(traindataset, batch_size=args.batch_size, shuffle=True, num_workers=0,drop_last=False)
-    #train_loader = cycle(train_loader)
+    for batch_idx, (inputs, targets) in enumerate(train_loader):
+        print(inputs, inputs.shape)
+        print("DONE EARLY")
+        exit()
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
     
     # Importing Network Architecture
