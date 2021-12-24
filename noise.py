@@ -35,7 +35,6 @@ for i, process in enumerate(q_l):
     # for testing!!!
     process[-1] = "echo LOL"
     p = Popen(process)
-    # always 0???
     processes.append((i%N, p))
     if len(processes) == N:
         wait = True
