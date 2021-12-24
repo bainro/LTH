@@ -20,7 +20,7 @@ for trial in range(n_repeats):
     exp_name = "trial_" + str(trial)
     cmd = "python main.py --dataset cifar10 --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
     cmd += exp_name
-    q_l.append([['/bin/bash', '-c', cmd]])
+    q_l.append(['/bin/bash', '-c', cmd])
 
 done_i = 0
 for i, process in enumerate(q_l):
