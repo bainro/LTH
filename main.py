@@ -134,8 +134,8 @@ def main(args, ITE=0):
     # NOTE First Pruning Iteration is of No Compression
     bestacc = 0.0
     best_accuracy = 0
-    base_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{args.exp_name}/"
-    utils.checkdir(base_dir)
+    dump_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{args.exp_name}/"
+    utils.checkdir(dump_dir)
     ITERATION = args.prune_iterations
     comp = np.zeros(ITERATION,float)
     bestacc = np.zeros(ITERATION,float)
@@ -208,13 +208,13 @@ def main(args, ITE=0):
         plt.close()
 
         # Dump Plot values
-        base_dir = f"{os.getcwd()}/dumps/lt/{args.arch_type}/{args.dataset}/{args.exp_name}/"
-        utils.checkdir(base_dir)
-        all_loss.dump(base_dir + f"{args.prune_type}_all_loss_{comp1}.dat")
-        all_accuracy.dump(base_dir + f"{args.prune_type}_all_accuracy_{comp1}.dat")
+        dump_dir = f"{os.getcwd()}/dumps/lt/{args.arch_type}/{args.dataset}/{args.exp_name}/"
+        utils.checkdir(dump_dir)
+        all_loss.dump(dump_dir + f"{args.prune_type}_all_loss_{comp1}.dat")
+        all_accuracy.dump(dump_dir + f"{args.prune_type}_all_accuracy_{comp1}.dat")
         
         # Dumping mask
-        with open(base_dir + f"{args.prune_type}_mask_{comp1}.pkl", 'wb') as fp:
+        with open(dump_dir + f"{args.prune_type}_mask_{comp1}.pkl", 'wb') as fp:
             pickle.dump(mask, fp)
         
         # Making variables into 0
@@ -223,8 +223,8 @@ def main(args, ITE=0):
         all_accuracy = np.zeros(args.end_iter,float)
 
     # Dumping Values for Plotting
-    comp.dump(base_dir + f"{args.prune_type}_compression.dat")
-    bestacc.dump(base_dir + f"{args.prune_type}_bestaccuracy.dat")
+    comp.dump(dump_dir + f"{args.prune_type}_compression.dat")
+    bestacc.dump(dump_dir + f"{args.prune_type}_bestaccuracy.dat")
 
     # Plotting
     a = np.arange(args.prune_iterations)
