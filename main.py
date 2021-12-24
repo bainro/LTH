@@ -64,6 +64,23 @@ def main(args, ITE=0):
     train_loader = torch.utils.data.DataLoader(traindataset, batch_size=args.batch_size, shuffle=True, num_workers=0,drop_last=False)
     total_mean_px = 0
     total_elewise = 0
+    
+    mean = 0.0
+    for images, _ in train_loader:
+        batch_samples = images.size(0) 
+        images = images.view(batch_samples, images.size(1), -1)
+        mean += images.mean(2).sum(0)
+    mean = mean / len(train_loader.dataset)
+
+    var = 0.0
+    for images, _ in train_loader:
+        batch_samples = images.size(0)
+        images = images.view(batch_samples, images.size(1), -1)
+        var += ((images - mean.unsqueeze(1))**2).sum([0,2])
+    std = torch.sqrt(var / (len(train_loader.dataset)*224*224))
+    
+    print("mean, std: ", mean, std)
+    '''
     for _batch_idx, (inputs, _targets) in enumerate(train_loader):
         batch_size = inputs.size(0)
         print("inputs.shape: ", inputs.shape)
@@ -71,8 +88,16 @@ def main(args, ITE=0):
         total_elewise += torch.sum(inputs)
         #total_mean_px += torch.mean(inputs)
     #print("average px value: ", total_mean_px/len(train_loader))
-    print("average px value: ", total_elewise/(len(train_loader)*(28*28)))
+    mean_ele = total_elewise/(len(train_loader)*(28*28))
+    print("average px value: ", mean_ele)
+    for _batch_idx, (inputs, _targets) in enumerate(train_loader):
+        batch_size = inputs.size(0)
+        print("inputs.shape: ", inputs.shape)
+        # torch.set_printoptions(profile="full")
+        total_elewise += torch.sum(inputs)
+        #total_mean_px += torch.mean(inputs)
     print("~ std: ", total_elewise/(_batch_idx*60))
+    '''
     exit()
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
     
