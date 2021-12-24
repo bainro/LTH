@@ -1,11 +1,8 @@
-This is not my work, this is a lazy man's fork of the repo here: https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch
-
-I've added some features though, not just a simple copy and paste.
-
 # Lottery Ticket Hypothesis in Pytorch 
-[![Made With python 3.7](https://img.shields.io/badge/Made%20with-Python%203.7-brightgreen)]() [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)]() [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)]() 
 
 This repository contains a **Pytorch** implementation of the paper [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) by [Jonathan Frankle](https://github.com/jfrankle) and [Michael Carbin](https://people.csail.mit.edu/mcarbin/) that can be **easily adapted to any model/dataset**.
+
+This is not my work, this is a lazy man's fork of the repo here: https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch. I've added some features though, not just a simple copy and paste.
 		
 ## Requirements
 ```
