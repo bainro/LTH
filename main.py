@@ -76,7 +76,7 @@ def main(args, ITE=0):
         batch_samples = images.size(0)
         images = images.view(batch_samples, images.size(1), -1)
         var += ((images - mean.unsqueeze(1))**2).sum([0,2])
-    std = torch.sqrt(var / (len(train_loader.dataset)*images.size(-1)**2))
+    std = torch.sqrt(var / (len(train_loader.dataset)*images.size(-1))
     
     print("mean, std: ", mean, std)
     exit()
