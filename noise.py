@@ -22,9 +22,8 @@ for trial in range(n_repeats):
     cmd += exp_name
     q_l.append([['/bin/bash', '-c', cmd]])
 
-queue = list(q_l)
 done_i = 0
-for i, process in enumerate(queue):
+for i, process in enumerate(q_l):
     # could break & be unefficient on other PCs
     if done_i < 4:
         gpu_i = 2
