@@ -33,6 +33,7 @@ def main(args, ITE=0):
     reinit = True if args.prune_type=="reinit" else False
 
     # Data Loader
+    ### This is the mean & std for just MNIST, yes? Hmm...
     transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.1307,), (0.3081,))])
     if args.dataset == "mnist":
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
