@@ -32,7 +32,8 @@ for i, process in enumerate(queue):
         gpu_i = 1
     else:
         gpu_i = 0
-    process[-1] += (" --gpu " + str(gpu_i) + " &>/dev/null")
+    # process[-1] += (" --gpu " + str(gpu_i) + " &>/dev/null")
+    process[-1] = process[-1] + (" --gpu " + str(gpu_i) + " &>/dev/null")
     print(process)
     p = Popen(process)
     processes.append((done_i, p))
