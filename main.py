@@ -66,10 +66,13 @@ def main(args, ITE=0):
         batch_size = inputs.size(0)
         print("inputs.shape: ", inputs.shape)
         print("batch_size: ", batch_size)
-        print("image_mean: ", torch.mean(inputs))
+        total += torch.mean(inputs))
         # inputs = Variable(inputs)
         print("DONE EARLY")
-        exit()
+        print(_batch_idx)
+       
+    print("average px value: ", 123)
+    exit()
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=0,drop_last=True)
     
     # Importing Network Architecture
