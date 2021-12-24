@@ -11,7 +11,7 @@ def check_for_done(l):
     return False, False
 
 processes = list()
-N = 8
+N = 6
 n_repeats = 10
 q_l = []
 
@@ -25,12 +25,13 @@ for trial in range(n_repeats):
 done_i = 0
 for i, process in enumerate(q_l):
     # could break & be unefficient on other PCs
-    if done_i < 4:
-        gpu_i = 2
-    elif done_i < 6:
-        gpu_i = 1
-    else:
-        gpu_i = 0
+    gpu_i = done_i % 3
+#     if done_i < 4:
+#         gpu_i = 2
+#     elif done_i < 6:
+#         gpu_i = 1
+#     else:
+#         gpu_i = 0
     process[-1] += (" --gpu " + str(gpu_i) + " &>/tmp/" + str(i))
     # for testing!!!
     # process[-1] = "echo LOL"
