@@ -26,8 +26,11 @@ done_i = None
 for i, process in enumerate(q_l):
     print("done_i: ", done_i)
     # could break & be unefficient on other PCs
-    if done_i != None:
+    if done_i == None:
+        gpu_i = i % 3
+    else:
         gpu_i = done_i % 3
+    
 #     if done_i < 4:
 #         gpu_i = 2
 #     elif done_i < 6:
