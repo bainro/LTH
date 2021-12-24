@@ -11,10 +11,10 @@ def check_for_done(l):
     return False, False
 
 processes = list()
-N = 5
+N = 3
 
 # stdout=PIPE, stderr=PIPE
-q_l = [['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'echo', 'OhMehLOL!']]
+q_l = [['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'echo OMG']]
 queue = list(q_l)
 # ["echo lol", "sleep 5", "echo dblol", "sleep 5", "sleep 5", "sleep 5", "sleep 5", "echo trplol", "sleep 5", "echo duadlol"]
 for process in queue:
