@@ -13,13 +13,11 @@ def check_for_done(l):
 processes = list()
 N = 3
 
-# stdout=PIPE, stderr=PIPE
 q_l = [['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'sleep 5'], ['/bin/bash', '-c', 'echo OMG']]
 queue = list(q_l)
-# ["echo lol", "sleep 5", "echo dblol", "sleep 5", "sleep 5", "sleep 5", "sleep 5", "echo trplol", "sleep 5", "echo duadlol"]
-for process in queue:
+for i, process in enumerate(queue):
     p = Popen(process)
-    processes.append(p)
+    processes.append((i, p))
     if len(processes) == N:
         wait = True
         while wait:
@@ -27,8 +25,9 @@ for process in queue:
 
             if done:
                 # need to check gpu on process cmd call
-                finished_p = processes.pop(num)
-                print("finished_p: ", finished_p)
+                done_i, done_p = processes.pop(num)
+                print("done_i: ", done_i)
+                print("done_p: ", done_p)
                 wait = False
             else:
                 # set so the cpu can save cycles checking
