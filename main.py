@@ -13,7 +13,6 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import matplotlib.pyplot as plt
 import os
-from tensorboardX import SummaryWriter
 import torchvision.utils as vutils
 import seaborn as sns
 import torch.nn.init as init
@@ -21,9 +20,6 @@ import pickle
 
 # Custom Libraries
 import utils
-
-# Tensorboard initialization
-writer = SummaryWriter()
 
 # Plotting Style
 sns.set_style('darkgrid')
@@ -194,7 +190,6 @@ def main(args, ITE=0):
                 pbar.set_description(
                     f'Train Epoch: {iter_}/{args.end_iter} Loss: {loss:.6f} Accuracy: {accuracy:.2f}% Best Accuracy: {best_accuracy:.2f}%')       
 
-        writer.add_scalar('Accuracy/test', best_accuracy, comp1)
         bestacc[_ite]=best_accuracy
 
         # Plotting Loss (Training), Accuracy (Testing), Iteration Curve
