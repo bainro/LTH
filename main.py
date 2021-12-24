@@ -66,7 +66,9 @@ def main(args, ITE=0):
     for _batch_idx, (inputs, _targets) in enumerate(train_loader):
         batch_size = inputs.size(0)
         print("inputs.shape: ", inputs.shape)
-        print(inputs);torch.log(inputs);exit()
+        torch.set_printoptions(profile="full")
+        print(inputs)
+        exit()
         # print("batch_size: ", batch_size)
         total += torch.mean(inputs)
         # inputs = Variable(inputs)
