@@ -5,7 +5,7 @@ from subprocess import Popen, PIPE
 import time
 
 def check_for_done(l):
-    for i, p in enumerate(l):
+    for i, (_i, p) in enumerate(l):
         if p.poll() is not None:
             return True, i
     return False, False
