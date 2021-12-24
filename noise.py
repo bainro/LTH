@@ -24,12 +24,14 @@ for trial in range(n_repeats):
 
 done_i = None
 for i, process in enumerate(q_l):
-    print("done_i: ", done_i)
+    
     # could break & be unefficient on other PCs
     if done_i == None:
         gpu_i = i % 3
+        print("i: ", i)
     else:
         gpu_i = done_i % 3
+        print("done_i: ", done_i)
     
 #     if done_i < 4:
 #         gpu_i = 2
