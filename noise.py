@@ -33,6 +33,7 @@ for i, process in enumerate(queue):
     else:
         gpu_i = 0
     # process[-1] += (" --gpu " + str(gpu_i) + " &>/dev/null")
+    print("process: ", process)
     print("process[-1]: ", process[-1])
     process[-1] = process[-1] + (" --gpu " + str(gpu_i) + " &>/dev/null")
     print(process)
