@@ -24,6 +24,7 @@ for trial in range(n_repeats):
 
 done_i = 0
 for i, process in enumerate(q_l):
+    print("done_i: ", done_i)
     # could break & be unefficient on other PCs
     gpu_i = done_i % 3
 #     if done_i < 4:
