@@ -134,7 +134,7 @@ def main(args, ITE=0):
     # NOTE First Pruning Iteration is of No Compression
     bestacc = 0.0
     best_accuracy = 0
-    base_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/"
+    base_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{args.exp_name}/"
     utils.checkdir(base_dir)
     ITERATION = args.prune_iterations
     comp = np.zeros(ITERATION,float)
