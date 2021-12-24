@@ -66,6 +66,7 @@ def main(args, ITE=0):
         batch_size = inputs.size(0)
         print("inputs.shape: ", inputs.shape)
         print("batch_size: ", batch_size)
+        print("image_mean: ", torch.mean(inputs))
         # inputs = Variable(inputs)
         print("DONE EARLY")
         exit()
