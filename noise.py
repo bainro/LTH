@@ -12,7 +12,7 @@ def check_for_done(l):
 
 processes = list()
 N = 6
-n_repeats = 10
+n_repeats = 2 # 10
 q_l = []
 
 # need to modulo the gpu # from done_i
