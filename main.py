@@ -62,6 +62,7 @@ def main(args, ITE=0):
         exit()
 
     train_loader = torch.utils.data.DataLoader(traindataset, batch_size=args.batch_size, shuffle=True, num_workers=0,drop_last=False)
+    total = 0
     for _batch_idx, (inputs, _targets) in enumerate(train_loader):
         batch_size = inputs.size(0)
         print("inputs.shape: ", inputs.shape)
