@@ -33,8 +33,12 @@ def main(args, ITE=0):
     reinit = True if args.prune_type=="reinit" else False
 
     # Data Loader
-    ### This is the mean & std for just MNIST, yes? Hmm...
+    
     transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.1307,), (0.3081,))])
+    assert args.dataset == "mnist", "This is the mean & std for just MNIST!"
+    # for cifar10/100 put in: 
+        # normalize = transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+    
     if args.dataset == "mnist":
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.MNIST('../data', train=False, transform=transform)
