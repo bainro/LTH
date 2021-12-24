@@ -67,12 +67,12 @@ def main(args, ITE=0):
         testdataset = datasets.CIFAR100('../data', train=False, transform=transform)   
         from archs.cifar100 import AlexNet, fc1, LeNet5, vgg, resnet  
     
-    assert transform != None, "Need to implement correct transform!"
-    
     # If you want to add extra datasets paste here
     else:
         print("\nWrong Dataset choice \n")
         exit()
+        
+    assert transform != None, "Need to implement correct transform!"
 
     train_loader = torch.utils.data.DataLoader(traindataset, batch_size=args.batch_size, shuffle=True, num_workers=2,drop_last=False)
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=2,drop_last=True)
