@@ -1,7 +1,7 @@
 """
 script for testing the noise robustness of ~Lenet5 WLTs & RLTs on MNIST & CIFAR10
 """
-import subprocess
+from subprocess import Popen, PIPE
 import time
 
 def check_for_done(l):
@@ -11,10 +11,13 @@ def check_for_done(l):
     return False, False
 
 processes = list()
-N = 8
-queue = list(["echo lol", "sleep 5", "echo dblol", "sleep 5", "sleep 5", "sleep 5", "sleep 5", "echo trplol", "sleep 5", "echo duadlol"])
+N = 5
+
+q_l = [['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'echo', 'OhMehLOL!']]
+queue = list(q_l, stdout=PIPE, stderr=PIPE)
+# ["echo lol", "sleep 5", "echo dblol", "sleep 5", "sleep 5", "sleep 5", "sleep 5", "echo trplol", "sleep 5", "echo duadlol"]
 for process in queue:
-    p = subprocess.Popen(process)
+    p = Popen(process)
     processes.append(p)
     if len(processes) == N:
         wait = True
