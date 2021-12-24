@@ -1,5 +1,6 @@
 # Importing Libraries
 import argparse
+import random
 import copy
 import os
 import sys
@@ -17,9 +18,7 @@ import torchvision.utils as vutils
 import seaborn as sns
 import torch.nn.init as init
 import pickle
-
-# Custom Libraries
-import utils
+import utils # custom library
 
 # Plotting Style
 sns.set_style('darkgrid')
@@ -116,8 +115,9 @@ def main(args, ITE=0):
 
     # Copying and Saving Initial State
     initial_state_dict = copy.deepcopy(model.state_dict())
-    utils.checkdir(f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/")
-    torch.save(model, f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/initial_state_dict_{args.prune_type}.pth.tar")
+    base_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{args.exp_name}/"
+    utils.checkdir(base_dir)
+    torch.save(model, base_dir + f"initial_state_dict_{args.prune_type}.pth.tar")
 
     # Making Initial Mask
     make_mask(model)
@@ -419,6 +419,7 @@ if __name__ == "__main__":
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--prune_type", default="lt", type=str, help="lt | reinit")
     parser.add_argument("--gpu", default="0", type=str)
+    parser.add_argument("--exp_name", default=str(random.randint(0, 10000)), type=str, "experiment name")
     parser.add_argument("--dataset", default="mnist", type=str, help="mnist | cifar10 | fashionmnist | cifar100")
     parser.add_argument("--arch_type", default="fc1", type=str, help="fc1 | lenet5 | alexnet | vgg16 | resnet18 | densenet121")
     parser.add_argument("--prune_percent", default=10, type=int, help="Pruning percent")
