@@ -122,13 +122,3 @@ Lottery-Ticket-Hypothesis-in-Pytorch
 ## Interesting papers that are related to Lottery Ticket Hypothesis which I enjoyed 
 - [Deconstructing Lottery Tickets: Zeros, Signs, and the Supermask](https://eng.uber.com/deconstructing-lottery-tickets/)
 
-## Acknowledgement 
-Parts of code were borrowed from [ktkth5](https://github.com/ktkth5/lottery-ticket-hyopothesis).
-
-## Issue / Want to Contribute ? :
-Open a new issue or do a pull request incase you are facing any difficulty with the code base or if you want to contribute to it.
-
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch/issues)
-
-<a href="https://www.buymeacoffee.com/MfgDK7aSC" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
