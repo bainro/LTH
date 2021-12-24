@@ -14,7 +14,7 @@ processes = list()
 N = 5
 
 # stdout=PIPE, stderr=PIPE
-q_l = [['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'sleep', '5'], ['bash', 'echo', 'OhMehLOL!']]
+q_l = [['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'sleep', '5'], ['/bin/bash', 'echo', 'OhMehLOL!']]
 queue = list(q_l)
 # ["echo lol", "sleep 5", "echo dblol", "sleep 5", "sleep 5", "sleep 5", "sleep 5", "echo trplol", "sleep 5", "echo duadlol"]
 for process in queue:
