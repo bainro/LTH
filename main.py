@@ -115,9 +115,9 @@ def main(args, ITE=0):
 
     # Copying and Saving Initial State
     initial_state_dict = copy.deepcopy(model.state_dict())
-    base_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{args.exp_name}/"
+    tar_dir = f"{os.getcwd()}/saves/{args.arch_type}/{args.dataset}/{args.exp_name}/"
     utils.checkdir(base_dir)
-    torch.save(model, base_dir + f"initial_state_dict_{args.prune_type}.pth.tar")
+    torch.save(model, tar_dir + f"initial_state_dict_{args.prune_type}.pth.tar")
 
     # Making Initial Mask
     make_mask(model)
@@ -178,7 +178,7 @@ def main(args, ITE=0):
                 # Save Weights
                 if accuracy > best_accuracy:
                     best_accuracy = accuracy
-                    torch.save(model, base_dir + f"{_ite}_model_{args.prune_type}.pth.tar")
+                    torch.save(model, tar_dir + f"{_ite}_model_{args.prune_type}.pth.tar")
 
             # Training
             loss = train(model, train_loader, optimizer, criterion)
