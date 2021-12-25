@@ -120,7 +120,7 @@ def main(args, ITE=0):
     utils.checkdir(tar_dir)
     torch.save(model, tar_dir + f"initial_state_dict_{args.prune_type}.pth.tar")
 
-    if args.rlt:
+    if not args.rlt:
         # Making Initial Mask
         make_mask(model, args.rlt)
 
