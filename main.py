@@ -122,7 +122,7 @@ def main(args, ITE=0):
 
     if not args.rlt:
         # Making Initial Mask
-        make_mask(model, args.rlt)
+        make_mask(model, None)
 
     # Optimizer and Loss
     optimizer = torch.optim.Adam(model.parameters(), weight_decay=1e-4)
