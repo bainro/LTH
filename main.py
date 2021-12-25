@@ -156,6 +156,7 @@ def main(args, ITE=0):
             # same original initialized weights, with different random masks
             original_initialization(mask, initial_state_dict)	
         else:        
+            # first net is unpruned!
             if _ite != 0:
                 prune_by_percentile(args.prune_percent, reinit=reinit)
                 if reinit:
@@ -169,8 +170,8 @@ def main(args, ITE=0):
                     step = 0
                 else:
                     original_initialization(mask, initial_state_dict)
-                optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-4)
-                
+                    
+        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-4)
         print(f"\n--- Pruning Level [{ITE}:{_ite}/{ITERATION}]: ---")
         # Print the table of Nonzeros in each layer
         comp1 = utils.print_nonzeros(model)
