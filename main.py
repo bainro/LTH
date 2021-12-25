@@ -175,9 +175,6 @@ def main(args, ITE=0):
         comp1 = utils.print_nonzeros(model)
         comp[_ite] = comp1
         pbar = tqdm(range(args.end_iter))
-        if _ite == ITERATION - 1:
-            # last iteration's epoch. Used for testing pruning prematurely.
-            pbar = tqdm(range(args.last_iter_epochs))
 
         for iter_ in pbar:
 
@@ -192,9 +189,8 @@ def main(args, ITE=0):
 
             # Training
             loss = train(model, train_loader, optimizer, criterion)
-            if _ite != ITERATION - 1:
-                all_loss[iter_] = loss
-                all_accuracy[iter_] = accuracy
+            all_loss[iter_] = loss
+            all_accuracy[iter_] = accuracy
             
             # Frequency for Printing Accuracy and Loss
             if iter_ % args.print_freq == 0:
