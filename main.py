@@ -119,8 +119,9 @@ def main(args, ITE=0):
     utils.checkdir(tar_dir)
     torch.save(model, tar_dir + f"initial_state_dict_{args.prune_type}.pth.tar")
 
-    # Making Initial Mask
-    make_mask(model)
+    if args.rlt:
+        # Making Initial Mask
+        make_mask(model)
 
     # Optimizer and Loss
     optimizer = torch.optim.Adam(model.parameters(), weight_decay=1e-4)
@@ -145,22 +146,31 @@ def main(args, ITE=0):
 
 
     for _ite in range(args.start_iter, ITERATION):
-        if not _ite == 0:
-            prune_by_percentile(args.prune_percent, resample=resample, reinit=reinit)
-            if reinit:
-                model.apply(weight_init)
-                step = 0
-                for name, param in model.named_parameters():
-                    if 'weight' in name:
-                        weight_dev = param.device
-                        param.data = torch.from_numpy(param.data.cpu().numpy() * mask[step]).to(weight_dev)
-                        step = step + 1
-                step = 0
-            else:
-                original_initialization(mask, initial_state_dict)
-            optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-4)
+        
+        # random lotter ticket
+        if args.rlt:
+            # percent of weights to prune	
+            percent = 1 - ((1 - args.prune_percent / 100) ** _ite)	
+            make_mask(model, percent)
+            # same original initialized weights, with different random masks
+            original_initialization(mask, initial_state_dict)	
+        else:        
+            if _ite != 0:
+                prune_by_percentile(args.prune_percent, resample=resample, reinit=reinit)
+                if reinit:
+                    model.apply(weight_init)
+                    step = 0
+                    for name, param in model.named_parameters():
+                        if 'weight' in name:
+                            weight_dev = param.device
+                            param.data = torch.from_numpy(param.data.cpu().numpy() * mask[step]).to(weight_dev)
+                            step = step + 1
+                    step = 0
+                else:
+                    original_initialization(mask, initial_state_dict)
+                optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-4)
+                
         print(f"\n--- Pruning Level [{ITE}:{_ite}/{ITERATION}]: ---")
-
         # Print the table of Nonzeros in each layer
         comp1 = utils.print_nonzeros(model)
         comp[_ite] = comp1
