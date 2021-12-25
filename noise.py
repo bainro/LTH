@@ -23,10 +23,10 @@ for trial in range(n_repeats):
     cmd = "python main.py --dataset mnist --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
     cmd += exp_name
     q_l.append(['/bin/bash', '-c', cmd])
-    cmd = "python random_pruning.py --dataset cifar --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
+    cmd = "python main.py --dataset cifar --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --rlt --exp_name "
     cmd += exp_name
     q_l.append(['/bin/bash', '-c', cmd])
-    cmd = "python random_pruning.py --dataset mnist --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
+    cmd = "python main.py --dataset mnist --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --rlt --exp_name "
     cmd += exp_name
     q_l.append(['/bin/bash', '-c', cmd])
 
