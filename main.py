@@ -157,7 +157,7 @@ def main(args, ITE=0):
             original_initialization(mask, initial_state_dict)	
         else:        
             if _ite != 0:
-                prune_by_percentile(args.prune_percent, resample=resample, reinit=reinit)
+                prune_by_percentile(args.prune_percent, reinit=reinit)
                 if reinit:
                     model.apply(weight_init)
                     step = 0
@@ -290,7 +290,7 @@ def test(model, test_loader, criterion):
     return accuracy
 
 # Prune by Percentile module
-def prune_by_percentile(percent, resample=False, reinit=False,**kwargs):
+def prune_by_percentile(percent, reinit=False,**kwargs):
         global step
         global mask
         global model
@@ -451,11 +451,5 @@ if __name__ == "__main__":
 
     os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
     os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
-    
-    
-    #FIXME resample
-    resample = False
 
-    # Looping Entire process
-    #for i in range(0, 5):
     main(args, ITE=1)
