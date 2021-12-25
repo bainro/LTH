@@ -442,7 +442,7 @@ if __name__ == "__main__":
     parser.add_argument("--exp_name", default=str(random.randint(0, 10000)), type=str, help="experiment name")
     parser.add_argument("--dataset", default="mnist", type=str, help="mnist | cifar10 | fashionmnist | cifar100")
     parser.add_argument("--arch_type", default="fc1", type=str, help="fc1 | lenet5 | alexnet | vgg16 | resnet18 | densenet121")
-    parser.add_argument("--prune_percent", default=10, type=int, help="Pruning percent")
+    parser.add_argument("--prune_percent", default=12.5, type=float, help="Pruning percent")
     parser.add_argument("--prune_iterations", default=35, type=int, help="Pruning iterations count")
     parser.add_argument("--last_iter_epochs", default=100, type=int, help="Final # of training epochs on final pruning iteration")
 
