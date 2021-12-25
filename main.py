@@ -121,7 +121,7 @@ def main(args, ITE=0):
 
     if args.rlt:
         # Making Initial Mask
-        make_mask(model)
+        make_mask(model, args.rlt)
 
     # Optimizer and Loss
     optimizer = torch.optim.Adam(model.parameters(), weight_decay=1e-4)
@@ -315,7 +315,7 @@ def prune_by_percentile(percent, resample=False, reinit=False,**kwargs):
         step = 0
 
 # Function to make an empty mask of the same size as the model
-def make_mask(model):
+def make_mask(model, percentage=None):
     global step
     global mask
     step = 0
@@ -328,6 +328,16 @@ def make_mask(model):
         if 'weight' in name:
             tensor = param.data.cpu().numpy()
             mask[step] = np.ones_like(tensor)
+            if percentage != None:
+                tmp_mask_shape = mask[step].shape	
+                flat_mask = mask[step].flatten()	
+                num_indices = math.floor(flat_mask.shape[0] * percent)	
+                if num_indices > 0:	
+                    # pick percent # of indices to set to 0	
+                    idx_to_mask_out = np.random.choice(np.array(range(flat_mask.shape[0])), size=num_indices, replace=False)	
+                    for i in idx_to_mask_out:	
+                        flat_mask[i] = 0	
+                mask[step] = flat_mask.reshape(tmp_mask_shape)
             step = step + 1
     step = 0
 
