@@ -316,7 +316,7 @@ def prune_by_percentile(percent, resample=False, reinit=False,**kwargs):
         step = 0
 
 # Function to make an empty mask of the same size as the model
-def make_mask(model, percentage=None):
+def make_mask(model, percent=None):
     global step
     global mask
     step = 0
@@ -329,7 +329,7 @@ def make_mask(model, percentage=None):
         if 'weight' in name:
             tensor = param.data.cpu().numpy()
             mask[step] = np.ones_like(tensor)
-            if percentage != None:
+            if percent != None:
                 tmp_mask_shape = mask[step].shape	
                 flat_mask = mask[step].flatten()	
                 num_indices = math.floor(flat_mask.shape[0] * percent)	
