@@ -88,11 +88,11 @@ for dataset in tqdm(datasets):
                 total_d[i] += d[i]
     # average lottery ticket sparsity vs acc
     total_d = total_d / n_repeats
-        
+
+    a = np.arange(prune_iterations)
     b = np.load(f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/lt_bestaccuracy.dat", allow_pickle=True)
     c = np.load(f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/reinit_bestaccuracy.dat", allow_pickle=True)
 
-    a = np.arange(prune_iterations)
     plt.plot(a, b, c="blue", label="Winning tickets") 
     plt.plot(a, c, c="red", label="Random tickets") 
     plt.title(f"Test Accuracy vs Weights % ({arch_type} | {dataset})") 
