@@ -282,6 +282,7 @@ def train(model, train_loader, optimizer, criterion):
 
 # Function for Testing
 # @TODO pass in dataset || grab from test_loader to get stdev values!
+# could also just pass it in as well!
 def test(model, test_loader, noise_type=0, noise_per=0):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
