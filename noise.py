@@ -30,6 +30,7 @@ for trial in range(n_repeats):
     cmd += "rlt_" + exp_name
     q_l.append(['/bin/bash', '-c', cmd])
 
+# keeps 2 training threads per gpu
 done_i = None
 for i, process in enumerate(q_l):
     
@@ -53,10 +54,17 @@ for i, process in enumerate(q_l):
             if done:
                 # need to check gpu on process cmd call
                 done_i, done_p = processes.pop(num)
-                # done_i = done_i % N
                 print("done_i: ", done_i)
                 print("done_p: ", done_p)
                 wait = False
             else:
-                # set so the cpu can save cycles checking
+                # set so the cpu can chill
                 time.sleep(0.5)
+                
+# avg of 10 for sparsity vs acc with RLT + WLT on MNIST + CIFAR10
+# load each checkpoint & do noisy testing
+    # multiple types of noise
+    # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
+# train single WLT & check for overfitting
+    # will require spliting training into ""+ validation set
+# doc in non-official repo about bp diff & freezing potentially affecting non-masked elements (?)
