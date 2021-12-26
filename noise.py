@@ -75,7 +75,6 @@ datasets = ["mnist", "cifar10"]
 dump_dir = f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/"
 
 for dataset in tqdm(datasets):
-
     a = np.arange(prune_iterations)
     
     total_b = None
@@ -90,7 +89,6 @@ for dataset in tqdm(datasets):
                 total_b[i] += b[i]
     avg_b = total_b / n_repeats
 
-    
     total_c = None
     for n in range(n_repeats):
         _c = os.path.join(dump_dir, "wlt_trial_" + str(n), "lt_bestaccuracy.dat")
@@ -102,19 +100,19 @@ for dataset in tqdm(datasets):
                 total_c[i] += c[i]
     avg_c = total_c / n_repeats
     
-    _d = os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat")
-    d = np.load(_d)
+    d = np.load(os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat"))
 
-    plt.plot(a, b, c="blue", label="Winning tickets") 
-    plt.plot(a, c, c="red", label="Random tickets") 
-    plt.title(f"Test Accuracy vs Weights % ({arch_type} | {dataset})") 
+    plt.plot(a, b, c="blue", label="Random tickets") 
+    plt.plot(a, c, c="red", label="Winning tickets") 
+    plt.title(f"Test Accuracy vs Weights FC | % ({dataset})") 
     plt.xlabel("Weights %") 
     plt.ylabel("Test accuracy") 
-    plt.xticks(a, d, rotation ="vertical") 
+    plt.xticks(a, d, rotation="vertical") 
     plt.ylim(0,100)
     plt.legend() 
     plt.grid(color="gray") 
 
+    # @TODO don't overwrite & name appropriately!
     plt.savefig(f"{os.getcwd()}/plots/lt/combined_plots/combined_{arch_type}_{dataset}.png", dpi=DPI, bbox_inches='tight') 
     plt.close()
         
