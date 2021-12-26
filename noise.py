@@ -104,8 +104,6 @@ for dataset in tqdm(datasets):
     
     y_min = min(np.concatenate((avg_b, avg_c)))
     y_max = max(np.concatenate((avg_b, avg_c)))
-    print("avg_b, avg_c: ", avg_b, avg_c)
-    print("y_min, y_max: ", y_min, y_max)
     
     plt.plot(a, avg_b, c="blue", label="Random tickets") 
     plt.plot(a, avg_c, c="red", label="Winning tickets") 
