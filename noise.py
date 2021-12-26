@@ -15,6 +15,9 @@ def check_for_done(l):
             return True, i
     return False, False
 
+DPI = 1200
+prune_iterations = 35
+datasets = ["mnist", "cifar10"]
 processes = list()
 N = 6
 n_repeats = 10
@@ -68,13 +71,10 @@ for i, process in enumerate(q_l):
                 # set so the cpu can chill
                 time.sleep(0.5)
                 
-# avg of 10 tickets. Sparsity vs acc with WLT + RLT on MNIST + CIFAR10
-DPI = 1200
-prune_iterations = 35
-datasets = ["mnist", "cifar10"]
-dump_dir = f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/"
-
+# avg of n_repeat (eg 10) tickets. Sparsity vs acc with WLT + RLT on MNIST + CIFAR10
 for dataset in tqdm(datasets):
+    dump_dir = f"{os.getcwd()}/dumps/lt/fc1/{dataset}/"
+    
     a = np.arange(prune_iterations)
     
     total_b = None
