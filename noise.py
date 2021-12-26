@@ -75,23 +75,36 @@ datasets = ["mnist", "cifar10"]
 dump_dir = f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/"
 
 for dataset in tqdm(datasets):
-    
-    total_d = None
-    for n in range(n_repeats):
-        # og d = lt_compression.dat; so rename!
-        _RENAME = os.path.join(dump_dir, "rlt_" + exp_name, "lt_bestaccuracy.dat")
-        d = np.load(_RENAME, allow_pickle=True)
-        if total_d == None:
-            total_d = d
-        else:
-            for i in len(d):
-                total_d[i] += d[i]
-    # average lottery ticket sparsity vs acc
-    total_d = total_d / n_repeats
 
     a = np.arange(prune_iterations)
-    b = np.load(f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/lt_bestaccuracy.dat", allow_pickle=True)
-    c = np.load(f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/reinit_bestaccuracy.dat", allow_pickle=True)
+    
+    total_b = None
+    for n in range(n_repeats):
+        # need to remove exp_name reference...
+        _b = os.path.join(dump_dir, "rlt_" + exp_name, "lt_bestaccuracy.dat")
+        b = np.load(_b, allow_pickle=True)
+        if total_b == None:
+            total_b = b
+        else:
+            for i in len(b):
+                total_b[i] += b[i]
+    avg_b = total_b / n_repeats
+
+    
+    total_c = None
+    for n in range(n_repeats):
+        _c = os.path.join(dump_dir, "wlt_" + exp_name, "lt_bestaccuracy.dat")
+        c = np.load(_c, allow_pickle=True)
+        if total_c == None:
+            total_c = b
+        else:
+            for i in len(b):
+                total_b[i] += b[i]
+    avg_b = total_b / n_repeats
+    
+    # doesn't matter rlt || wlt since they'll be the same
+    d = os.path.join(dump_dir, "rlt_" + exp_name, "lt_compression.dat")
+    d = np.load()
 
     plt.plot(a, b, c="blue", label="Winning tickets") 
     plt.plot(a, c, c="red", label="Random tickets") 
