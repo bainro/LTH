@@ -31,12 +31,14 @@ class RandomNoise(object):
 
   def __init__(self,
                noiselevel=0.0,
-               whiteValue=0.1307 + 2*0.3081,
+               constValue=0.1307 + 2*0.3081,
+               type=0,
                logDir=None, logProbability=0.01):
     """
     :param noiselevel:
-      From 0 to 1. For each pixel, set its value to whiteValue with this
-      probability. Suggested whiteVolue is 'mean + 2*stdev'
+      From 0 to 1. For each pixel, set its value to constValue with this
+      probability. Can also be set to -1*constValue depending on type.
+      Can also be uniformly distributed noise between +/- constValue.
 
     :param logDir:
       If set to a directory name, then will save a random sample of the images
@@ -47,10 +49,11 @@ class RandomNoise(object):
 
     """
     self.noiseLevel = noiselevel
-    self.whiteValue = whiteValue
+    self.constVal = constValue
     self.iteration = 0
     self.logDir = logDir
     self.logProbability = logProbability
+    self.type = type
 
 
   def __call__(self, image):
@@ -58,7 +61,16 @@ class RandomNoise(object):
     a = image.view(-1)
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
-    a[noise] = self.whiteValue
+    if type == 0:
+      a[noise] = self.constValue
+    elif type == 1:
+      a[noise] = self.constValue
+    elif type == 2:
+      a[noise] = self.constValue
+    elif type == 3:
+      a[noise] = self.constValue
+    elif:
+      assert False, "illegal noise type"; exit()
 
     # Save a subset of the images for debugging
     if self.logDir is not None:
