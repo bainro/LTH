@@ -67,4 +67,3 @@ for i, process in enumerate(q_l):
     # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
 # train single WLT & check for overfitting
     # will require spliting training into ""+ validation set
-# doc in non-official repo about bp diff & freezing potentially affecting non-masked elements (?)
