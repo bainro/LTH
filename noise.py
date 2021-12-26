@@ -97,7 +97,7 @@ for dataset in tqdm(datasets):
                 total_c[i] += c[i]
     avg_c = total_c / n_repeats
     
-    d = np.load(os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat"), allow_pickle=False)
+    d = np.load(os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat"), allow_pickle=True)
 
     plt.plot(a, avg_b, c="blue", label="Random tickets") 
     plt.plot(a, avg_c, c="red", label="Winning tickets") 
