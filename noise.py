@@ -79,7 +79,6 @@ for dataset in tqdm(datasets):
     
     total_b = None
     for n in range(n_repeats):
-        #TODO make sure only grabs trials from this script instance & not old ones!
         _b = os.path.join(dump_dir, "rlt_trial_" + str(n), "lt_bestaccuracy.dat")
         b = np.load(_b, allow_pickle=True)
         if total_b == None:
