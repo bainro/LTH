@@ -98,14 +98,17 @@ for dataset in tqdm(datasets):
     avg_c = total_c / n_repeats
     
     d = np.load(os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat"), allow_pickle=True)
-
+    
+    y_min = min(avg_b + avg_c)
+    y_max = max(avg_b + avg_c)
+    
     plt.plot(a, avg_b, c="blue", label="Random tickets") 
     plt.plot(a, avg_c, c="red", label="Winning tickets") 
     plt.title(f"Test Accuracy vs Weights % (FC1 | {dataset})") 
     plt.xlabel("Weights %") 
     plt.ylabel("Test accuracy") 
     plt.xticks(a, d, rotation="vertical") 
-    plt.ylim(0,100)
+    plt.ylim(y_min - 1, y_min + 1)
     plt.legend() 
     plt.grid(color="gray") 
 
