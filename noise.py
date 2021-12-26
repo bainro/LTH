@@ -78,6 +78,7 @@ for dataset in tqdm(datasets):
     
     total_d = None
     for n in range(n_repeats):
+        # og d = lt_compression.dat; so rename!
         _RENAME = os.path.join(dump_dir, "rlt_" + exp_name, "lt_bestaccuracy.dat")
         d = np.load(_RENAME, allow_pickle=True)
         if total_d == None:
