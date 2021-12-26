@@ -122,9 +122,11 @@ for dataset in tqdm(datasets):
     # multiple types of noise
     # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
 
+'''
 _traindata, testdata = get_split(dataset)
 test_loader = torch.utils.data.DataLoader(testdata, batch_size=512, shuffle=False, num_workers=2, drop_last=True)
 accuracy = test(get_model("fc1"), test_loader)
+'''
     
 # (separate script) train single WLT & check for overfitting
     # will require spliting training into ""+ validation set
