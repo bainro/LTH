@@ -31,14 +31,14 @@ class RandomNoise(object):
 
   def __init__(self,
                noiselevel=0.0,
-               constValue=0.1307 + 2*0.3081,
+               noiseValue=0.1307 + 2*0.3081,
                type=0,
                logDir=None, logProbability=0.01):
     """
     :param noiselevel:
-      From 0 to 1. For each pixel, set its value to constValue with this
-      probability. Can also be set to -1*constValue depending on type.
-      Can also be uniformly distributed noise between +/- constValue.
+      From 0 to 1. For each pixel, set its value to noiseValue with this
+      probability. Can also be set to -1*noiseValue depending on type.
+      Can also be uniformly distributed noise between +/- noiseValue.
 
     :param logDir:
       If set to a directory name, then will save a random sample of the images
@@ -49,7 +49,7 @@ class RandomNoise(object):
 
     """
     self.noiseLevel = noiselevel
-    self.constVal = constValue
+    self.constVal = noiseValue
     self.iteration = 0
     self.logDir = logDir
     self.logProbability = logProbability
@@ -63,16 +63,16 @@ class RandomNoise(object):
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
     # noise is +2 stdev
     if type == 0:
-      a[noise] = self.constValue
+      a[noise] = self.noiseValue
     # noise is -2 stdev
     elif type == 1:
-      a[noise] = self.constValue
+      a[noise] = self.noiseValue
     # mix of -/+ 2 stdev
     elif type == 2:
-      a[noise] = self.constValue
+      a[noise] = self.noiseValue
     # uniform noise sampled from -/+ 2 stdev
     elif type == 3:
-      a[noise] = self.constValue
+      a[noise] = self.noiseValue
     elif:
       assert False, "illegal noise type"; exit()
 
