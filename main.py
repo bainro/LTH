@@ -25,7 +25,7 @@ import utils # custom library
 # Plotting Style
 sns.set_style('darkgrid')
 
-def get_split(dataset, noise_type=0):
+def get_split(dataset, noise_type=None):
     transform = None
     trans_l = [transforms.ToTensor()]
     
@@ -33,12 +33,14 @@ def get_split(dataset, noise_type=0):
         assert dataset in ["mnist", "cifar10"], "noise exp's only setup for mnist & cifar10"
     
     if dataset == "mnist":
-        if noise_type == 1:
-            trans_l.append(RandomNoise(0.0, whiteValue=0.1307 + 2*0.3081))
+        if noise_type == 0:
+            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=0))
+        elif noise_type == 1:
+            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=1))
         elif noise_type == 2:
-            trans_l.append(RandomNoise(0.0, whiteValue=0.1307 + 2*0.3081))
+            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=2))
         elif noise_type == 3:
-            trans_l.append(RandomNoise(0.0, whiteValue=0.1307 + 2*0.3081))    
+            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=3))
         trans_l.append(transforms.Normalize((0.1307,), (0.3081,)))
         transform = transforms.Compose(trans_l)
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
