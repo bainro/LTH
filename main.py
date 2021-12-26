@@ -189,7 +189,7 @@ def main(args, ITE=0):
 
             # Frequency for Testing
             if iter_ % args.valid_freq == 0:
-                accuracy = test(model, test_loader, criterion)
+                accuracy = test(model, test_loader)
 
                 # Save Weights
                 if accuracy > best_accuracy:
