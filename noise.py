@@ -112,7 +112,7 @@ for dataset in tqdm(datasets):
     plt.xlabel("Weights %") 
     plt.ylabel("Test accuracy") 
     plt.xticks(a, d, rotation="vertical") 
-    plt.ylim(y_min - 1, y_min + 1)
+    plt.ylim(y_min - 1, y_max + 1)
     plt.legend() 
     plt.grid(color="gray") 
 
