@@ -101,7 +101,7 @@ for dataset in tqdm(datasets):
 
     plt.plot(a, avg_b, c="blue", label="Random tickets") 
     plt.plot(a, avg_c, c="red", label="Winning tickets") 
-    plt.title(f"Test Accuracy vs Weights FC | % ({dataset})") 
+    plt.title(f"Test Accuracy vs Weights % (FC1 | {dataset})") 
     plt.xlabel("Weights %") 
     plt.ylabel("Test accuracy") 
     plt.xticks(a, d, rotation="vertical") 
