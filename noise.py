@@ -80,8 +80,8 @@ for dataset in tqdm(datasets):
     
     total_b = None
     for n in range(n_repeats):
-        # need to remove exp_name reference...
-        _b = os.path.join(dump_dir, "rlt_" + exp_name, "lt_bestaccuracy.dat")
+        #TODO make sure only grabs trials from this script instance & not old ones!
+        _b = os.path.join(dump_dir, "rlt_trial_" + str(n), "lt_bestaccuracy.dat")
         b = np.load(_b, allow_pickle=True)
         if total_b == None:
             total_b = b
@@ -93,7 +93,7 @@ for dataset in tqdm(datasets):
     
     total_c = None
     for n in range(n_repeats):
-        _c = os.path.join(dump_dir, "wlt_" + exp_name, "lt_bestaccuracy.dat")
+        _c = os.path.join(dump_dir, "wlt_trial_" + str(n), "lt_bestaccuracy.dat")
         c = np.load(_c, allow_pickle=True)
         if total_c == None:
             total_c = c
@@ -102,8 +102,7 @@ for dataset in tqdm(datasets):
                 total_c[i] += c[i]
     avg_c = total_c / n_repeats
     
-    # need to replace exp_name w/ something more long term appropriate
-    _d = os.path.join(dump_dir, "rlt_" + exp_name, "lt_compression.dat")
+    _d = os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat")
     d = np.load(_d)
 
     plt.plot(a, b, c="blue", label="Winning tickets") 
