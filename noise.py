@@ -96,15 +96,15 @@ for dataset in tqdm(datasets):
         _c = os.path.join(dump_dir, "wlt_" + exp_name, "lt_bestaccuracy.dat")
         c = np.load(_c, allow_pickle=True)
         if total_c == None:
-            total_c = b
+            total_c = c
         else:
-            for i in len(b):
-                total_b[i] += b[i]
-    avg_b = total_b / n_repeats
+            for i in len(c):
+                total_c[i] += c[i]
+    avg_c = total_c / n_repeats
     
-    # doesn't matter rlt || wlt since they'll be the same
-    d = os.path.join(dump_dir, "rlt_" + exp_name, "lt_compression.dat")
-    d = np.load()
+    # need to replace exp_name w/ something more long term appropriate
+    _d = os.path.join(dump_dir, "rlt_" + exp_name, "lt_compression.dat")
+    d = np.load(_d)
 
     plt.plot(a, b, c="blue", label="Winning tickets") 
     plt.plot(a, c, c="red", label="Random tickets") 
