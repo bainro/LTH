@@ -1,5 +1,5 @@
 """
-script for testing the noise robustness of ~Lenet5 WLTs & RLTs on MNIST & CIFAR10
+script for testing the noise robustness of ~Lenet5 WLTs & RLTs on MNIST & CIFAR10 
 """
 from subprocess import Popen, PIPE
 import time
