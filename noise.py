@@ -77,22 +77,20 @@ for dataset in tqdm(datasets):
     
     a = np.arange(prune_iterations)
     
-    total_b = None
     for n in range(n_repeats):
         _b = os.path.join(dump_dir, "rlt_trial_" + str(n), "lt_bestaccuracy.dat")
         b = np.load(_b, allow_pickle=True)
-        if total_b == None:
+        if n == 0:
             total_b = b
         else:
             for i in len(b):
                 total_b[i] += b[i]
     avg_b = total_b / n_repeats
 
-    total_c = None
     for n in range(n_repeats):
         _c = os.path.join(dump_dir, "wlt_trial_" + str(n), "lt_bestaccuracy.dat")
         c = np.load(_c, allow_pickle=True)
-        if total_c == None:
+        if n == 0:
             total_c = c
         else:
             for i in len(c):
