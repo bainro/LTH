@@ -67,6 +67,25 @@ def get_split(dataset):
     assert transform != None, "Need to implement correct transform!"
     return traindataset, testdataset
 
+def get_model(arch_type):
+    if arch_type == "fc1":
+       model = fc1.fc1().to(device)
+    elif arch_type == "lenet5":
+        model = LeNet5.LeNet5().to(device)
+    elif arch_type == "alexnet":
+        model = AlexNet.AlexNet().to(device)
+    elif arch_type == "vgg16":
+        model = vgg.vgg16().to(device)  
+    elif arch_type == "resnet18":
+        model = resnet.resnet18().to(device)   
+    elif arch_type == "densenet121":
+        model = densenet.densenet121().to(device)   
+    # If you want to add extra model paste here
+    else:
+        print("\nWrong Model choice\n")
+        exit()
+    return model
+
 def main(args, ITE=0):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     reinit = True if args.prune_type=="reinit" else False
@@ -97,23 +116,8 @@ def main(args, ITE=0):
     
     # Importing Network Architecture
     global model
-    if args.arch_type == "fc1":
-       model = fc1.fc1().to(device)
-    elif args.arch_type == "lenet5":
-        model = LeNet5.LeNet5().to(device)
-    elif args.arch_type == "alexnet":
-        model = AlexNet.AlexNet().to(device)
-    elif args.arch_type == "vgg16":
-        model = vgg.vgg16().to(device)  
-    elif args.arch_type == "resnet18":
-        model = resnet.resnet18().to(device)   
-    elif args.arch_type == "densenet121":
-        model = densenet.densenet121().to(device)   
-    # If you want to add extra model paste here
-    else:
-        print("\nWrong Model choice\n")
-        exit()
-
+    model = get_model(args.arch_type)
+    
     # Weight Initialization
     model.apply(weight_init)
 
