@@ -13,6 +13,7 @@ import torch.nn.functional as F
 import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
+from image_transforms import RandomNoise
 import matplotlib.pyplot as plt
 import os
 import torchvision.utils as vutils
@@ -24,8 +25,11 @@ import utils # custom library
 # Plotting Style
 sns.set_style('darkgrid')
 
-def get_split(dataset):
+def get_split(dataset, noise_type=0):
     transform = None
+    
+    if noise_type != 0:
+        assert dataset in ["mnist", "cifar10"], "noise exp's only setup for mnist & cifar10"
     
     if dataset == "mnist":
         transform = transforms.Compose([
