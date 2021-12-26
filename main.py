@@ -281,7 +281,7 @@ def train(model, train_loader, optimizer, criterion):
     return train_loss.item()
 
 # Function for Testing
-def test(model, test_loader, criterion):
+def test(model, test_loader):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
     test_loss = 0
