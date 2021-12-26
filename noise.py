@@ -83,6 +83,7 @@ for dataset in tqdm(datasets):
         if n == 0:
             total_b = b
         else:
+            print("b: ", b)
             for i in len(b):
                 total_b[i] += b[i]
     avg_b = total_b / n_repeats
