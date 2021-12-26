@@ -71,12 +71,23 @@ for i, process in enumerate(q_l):
 # avg of 10 tickets. Sparsity vs acc with WLT + RLT on MNIST + CIFAR10
 DPI = 1200
 prune_iterations = 35
-
+datasets = ["mnist", "cifar10"]
 dump_dir = f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/"
-for arch_type in tqdm(arch_types):
-    # loads 1 of 40 trials... Need to avg over 10 similar for this dataset 
-    _RENAME = os.path.join(dump_dir, "rlt_" + exp_name, "lt_bestaccuracy.dat")
-    d = np.load(_RENAME, allow_pickle=True)
+
+for dataset in tqdm(datasets):
+    
+    total_d = None
+    for n in range(n_repeats):
+        _RENAME = os.path.join(dump_dir, "rlt_" + exp_name, "lt_bestaccuracy.dat")
+        d = np.load(_RENAME, allow_pickle=True)
+        if total_d == None:
+            total_d = d
+        else:
+            for i in len(d):
+                total_d[i] += d[i]
+    # average lottery ticket sparsity vs acc
+    total_d = total_d / n_repeats
+        
     b = np.load(f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/lt_bestaccuracy.dat", allow_pickle=True)
     c = np.load(f"{os.getcwd()}/dumps/lt/{arch_type}/{dataset}/reinit_bestaccuracy.dat", allow_pickle=True)
 
