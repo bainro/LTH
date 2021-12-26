@@ -109,7 +109,7 @@ for dataset in tqdm(datasets):
     plt.legend() 
     plt.grid(color="gray") 
 
-    plt.savefig(f"{os.getcwd()}/plots/lt/fc1/{dataset}/avg_over_{n_repeat}_trials.png", dpi=DPI, bbox_inches='tight') 
+    plt.savefig(f"{os.getcwd()}/plots/lt/fc1/{dataset}/avg_over_{n_repeats}_trials.png", dpi=DPI, bbox_inches='tight') 
     plt.close()
         
 # load each checkpoint & do noisy testing
