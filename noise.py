@@ -102,8 +102,8 @@ for dataset in tqdm(datasets):
     
     d = np.load(os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat"), allow_pickle=True)
     
-    y_min = min(avg_b + avg_c)
-    y_max = max(avg_b + avg_c)
+    y_min = min(np.concatenate((avg_b, avg_c)))
+    y_max = max(np.concatenate((avg_b, avg_c)))
     print("avg_b, avg_c: ", avg_b, avg_c)
     print("y_min, y_max: ", y_min, y_max)
     
