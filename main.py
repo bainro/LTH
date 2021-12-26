@@ -27,15 +27,20 @@ sns.set_style('darkgrid')
 
 def get_split(dataset, noise_type=0):
     transform = None
+    trans_l = [transforms.ToTensor()]
     
     if noise_type != 0:
         assert dataset in ["mnist", "cifar10"], "noise exp's only setup for mnist & cifar10"
     
     if dataset == "mnist":
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,))
-        ])
+        if noise_type == 1:
+            trans_l.append(RandomNoise(0.0, whiteValue=0.1307 + 2*0.3081))
+        elif noise_type == 2:
+            trans_l.append(RandomNoise(0.0, whiteValue=0.1307 + 2*0.3081))
+        elif noise_type == 3:
+            trans_l.append(RandomNoise(0.0, whiteValue=0.1307 + 2*0.3081))    
+        trans_l.append(transforms.Normalize((0.1307,), (0.3081,)))
+        transform = transforms.Compose(trans_l)
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.MNIST('../data', train=False, transform=transform)
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet
