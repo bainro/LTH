@@ -283,7 +283,7 @@ def train(model, train_loader, optimizer, criterion):
 # Function for Testing
 # @TODO pass in dataset || grab from test_loader to get stdev values!
 # could also just pass it in as well!
-def test(model, test_loader, noise_type=0, noise_per=0):
+def test(model, test_loader, noise_type=0, noise_per=0, stdev=0):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
     test_loss = 0
@@ -291,15 +291,16 @@ def test(model, test_loader, noise_type=0, noise_per=0):
     with torch.no_grad():
         for data, target in test_loader:
             if noise_type == 1:
-                # 2 sigma near full ON
+                # +2 stdev (near full brightness)
+                
                 pass
             elif noise_type == 2:
-                # 2 sigma near full OFF
+                # -2 stdev (near full darkness)
                 pass
             elif noise_type == 3:
-                # randomly both
+                # 50/50 +/- stdev (mix bright/dark noise)
                 pass
-            # elif MORE? eg variable noise offset?
+
             data, target = data.to(device), target.to(device)
             output = model(data)
             # test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
