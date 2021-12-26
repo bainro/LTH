@@ -65,8 +65,6 @@ for i, process in enumerate(q_l):
             if done:
                 # need to check gpu on process cmd call
                 done_i, done_p = processes.pop(num)
-                print("done_i: ", done_i)
-                print("done_p: ", done_p)
                 wait = False
             else:
                 # set so the cpu can chill
