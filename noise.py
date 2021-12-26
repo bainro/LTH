@@ -108,5 +108,5 @@ for dataset in tqdm(datasets):
 # load each checkpoint & do noisy testing
     # multiple types of noise
     # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
-# train single WLT & check for overfitting
+# (separate script) train single WLT & check for overfitting
     # will require spliting training into ""+ validation set
