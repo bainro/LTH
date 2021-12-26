@@ -101,8 +101,8 @@ for dataset in tqdm(datasets):
     
     d = np.load(os.path.join(dump_dir, "rlt_trial_0", "lt_compression.dat"))
 
-    plt.plot(a, b, c="blue", label="Random tickets") 
-    plt.plot(a, c, c="red", label="Winning tickets") 
+    plt.plot(a, avg_b, c="blue", label="Random tickets") 
+    plt.plot(a, avg_c, c="red", label="Winning tickets") 
     plt.title(f"Test Accuracy vs Weights FC | % ({dataset})") 
     plt.xlabel("Weights %") 
     plt.ylabel("Test accuracy") 
@@ -111,8 +111,7 @@ for dataset in tqdm(datasets):
     plt.legend() 
     plt.grid(color="gray") 
 
-    # @TODO don't overwrite & name appropriately!
-    plt.savefig(f"{os.getcwd()}/plots/lt/combined_plots/combined_{arch_type}_{dataset}.png", dpi=DPI, bbox_inches='tight') 
+    plt.savefig(f"{os.getcwd()}/plots/lt/combined_plots/avg_fc1_{dataset}.png", dpi=DPI, bbox_inches='tight') 
     plt.close()
         
 # load each checkpoint & do noisy testing
