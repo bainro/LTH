@@ -24,14 +24,10 @@ import utils # custom library
 # Plotting Style
 sns.set_style('darkgrid')
 
-def main(args, ITE=0):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    reinit = True if args.prune_type=="reinit" else False
-
-    # Data Loader
+def get_split(dataset):
     transform = None
     
-    if args.dataset == "mnist":
+    if dataset == "mnist":
         transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.Normalize((0.1307,), (0.3081,))
@@ -40,7 +36,7 @@ def main(args, ITE=0):
         testdataset = datasets.MNIST('../data', train=False, transform=transform)
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet
 
-    elif args.dataset == "cifar10":
+    elif dataset == "cifar10":
         transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
@@ -49,12 +45,12 @@ def main(args, ITE=0):
         testdataset = datasets.CIFAR10('../data', train=False, transform=transform)      
         from archs.cifar10 import AlexNet, LeNet5, fc1, vgg, resnet, densenet 
 
-    elif args.dataset == "fashionmnist":
+    elif dataset == "fashionmnist":
         traindataset = datasets.FashionMNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.FashionMNIST('../data', train=False, transform=transform)
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet 
 
-    elif args.dataset == "cifar100":
+    elif dataset == "cifar100":
         transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
@@ -69,6 +65,13 @@ def main(args, ITE=0):
         exit()
         
     assert transform != None, "Need to implement correct transform!"
+    return traindataset, testdataset
+
+def main(args, ITE=0):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    reinit = True if args.prune_type=="reinit" else False
+
+    traindataset, testdataset = get_split(args.dataset)
 
     train_loader = torch.utils.data.DataLoader(traindataset, batch_size=args.batch_size, shuffle=True, num_workers=2,drop_last=False)
     test_loader = torch.utils.data.DataLoader(testdataset, batch_size=args.batch_size, shuffle=False, num_workers=2,drop_last=True)
