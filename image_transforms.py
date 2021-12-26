@@ -61,12 +61,16 @@ class RandomNoise(object):
     a = image.view(-1)
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
+    # noise is +2 stdev
     if type == 0:
       a[noise] = self.constValue
+    # noise is -2 stdev
     elif type == 1:
       a[noise] = self.constValue
+    # mix of -/+ 2 stdev
     elif type == 2:
       a[noise] = self.constValue
+    # uniform noise sampled from -/+ 2 stdev
     elif type == 3:
       a[noise] = self.constValue
     elif:
