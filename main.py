@@ -281,19 +281,30 @@ def train(model, train_loader, optimizer, criterion):
     return train_loss.item()
 
 # Function for Testing
-def test(model, test_loader):
+# @TODO pass in dataset || grab from test_loader to get stdev values!
+def test(model, test_loader, noise_type=0, noise_per=0):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
     test_loss = 0
     correct = 0
     with torch.no_grad():
         for data, target in test_loader:
+            if noise_type == 1:
+                # 2 sigma near full ON
+                pass
+            elif noise_type == 2:
+                # 2 sigma near full OFF
+                pass
+            elif noise_type == 3:
+                # randomly both
+                pass
+            # elif MORE? eg variable noise offset?
             data, target = data.to(device), target.to(device)
             output = model(data)
-            test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
+            # test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
             pred = output.data.max(1, keepdim=True)[1]  # get the index of the max log-probability
             correct += pred.eq(target.data.view_as(pred)).sum().item()
-        test_loss /= len(test_loader.dataset)
+        # test_loss /= len(test_loader.dataset)
         accuracy = 100. * correct / len(test_loader.dataset)
     return accuracy
 
