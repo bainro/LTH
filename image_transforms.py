@@ -78,7 +78,7 @@ class Noise(object):
     elif type == None:
       pass
     else:
-      assert False, "illegal noise type"
+      assert False, "illegal noise type: " + str(type)
       exit()
 
     # Save a subset of the images for debugging
