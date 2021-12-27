@@ -52,11 +52,11 @@ class Noise(object):
     self.noiseLevel = noiselevel
     self.stdev = stdev
     self.iteration = 0
-    self.logDir = "/tmp/"
+    self.logDir = None
     self.logProbability = logProbability
     self.type = type
 
-
+  # will need to fix for CIFAR10 w/ 3 channels?
   def __call__(self, image):
     self.iteration += 1
     a = image.view(-1)
@@ -92,6 +92,7 @@ class Noise(object):
         outfile = os.path.join(self.logDir,
                                "im_noise_" + str(int(self.noiseLevel*100)) + "_"
                                + str(self.iteration).rjust(6,'0') + ".png")
+        # this will break for cifar10 ...
         skimage.io.imsave(outfile,image.view(28,28))
 
     return image
