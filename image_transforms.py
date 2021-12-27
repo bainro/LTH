@@ -34,7 +34,8 @@ class Noise(object):
                noiselevel=0.0,
                stdev=0.308, # mnist
                type=0,
-               logDir=None, logProbability=0.01):
+               logDir="/tmp", 
+               logProbability=0.01):
     """
     :param noiselevel:
       From 0 to 1. For each pixel, set its value to stdev with this
