@@ -72,12 +72,14 @@ class Noise(object):
     elif self.type == 2:
       # gaussian noise with mean=0 variation=1
       np_t = np.random.randn(a.shape[0])[noise]
+      # torch tensor
       t_t = torch.from_numpy(np_t).to(a)
       a[noise] = t_t
     elif self.type == 3:
       # uniform noise sampled over -/+ 2 stdev
       shifted = np.random.rand(a.shape[0]) - 0.5
-      a[noise] = (4 * self.stdev * shifted)[noise]
+      t_t = torch.from_numpy(4 * self.stdev * shifted).to(a)
+      a[noise] = t_t[noise]
     elif self.type == None:
       pass
     else:
