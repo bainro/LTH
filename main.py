@@ -113,7 +113,7 @@ def main(args, ITE=0):
     for images, _ in train_loader:
         batch_samples = images.size(0) 
         images = images.view(batch_samples, images.size(1), -1)
-        print(images[0]);exit()
+        # print(images[0]);exit()
         mean += images.mean(2).sum(0)
     mean = mean / len(train_loader.dataset)
 
