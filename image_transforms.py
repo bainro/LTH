@@ -57,13 +57,9 @@ class Noise(object):
     self.logProbability = logProbability
     self.type = type
 
-  # will need to fix for CIFAR10 w/ 3 channels?
   def __call__(self, image):
     self.iteration += 1
     a = image.view(-1)
-    #print("a.shape: ", a.shape)
-    #print("image.shape: ", image.shape)
-    #exit()
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
     
@@ -96,13 +92,13 @@ class Noise(object):
         outfile = os.path.join(self.logDir,
                                "im_noise_" + str(int(self.noiseLevel*100)) + "_"
                                + str(self.iteration).rjust(6,'0') + ".png")
-        # @TODO will require tweaking for new datasets
+        
+        # works for mnist, fmnist, cifar10|100
         if a.shape[0] == 28*28:
-          skimage.io.imsave(outfile, image.view(28,28)) # mnist|fmnist
+          skimage.io.imsave(outfile, image.view(28,28))
         else:
           # CHW -> HWC format
           image = image.permute(1, 2, 0)
-          skimage.io.imsave(outfile, image.view(32,32,3)) # cifar
-          exit()
+          skimage.io.imsave(outfile, image.view(32,32,3))
 
     return image
