@@ -94,7 +94,10 @@ class Noise(object):
         outfile = os.path.join(self.logDir,
                                "im_noise_" + str(int(self.noiseLevel*100)) + "_"
                                + str(self.iteration).rjust(6,'0') + ".png")
-        # this will break for cifar10 ...
-        skimage.io.imsave(outfile,image.view(28,28))
+        # @TODO will require tweaking for new datasets
+        if a.shape[0] == 28*28:
+          skimage.io.imsave(outfile, image.view(28,28)) # mnist|fmnist
+        else:
+          skimage.io.imsave(outfile, image.view(32,32,3)) # cifar
 
     return image
