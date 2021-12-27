@@ -62,7 +62,9 @@ class Noise(object):
     a = image.view(-1)
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
-  
+
+    print("a.size[0]: ", a.size[0])
+    
     if self.type == 0:
       # noise is +2 stdev
       a[noise] += 2 * self.stdev
