@@ -62,23 +62,23 @@ class Noise(object):
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
   
-    if type == 0:
+    if self.type == 0:
       # noise is +2 stdev
       a[noise] = 2 * self.stdev
-    elif type == 1:
+    elif self.type == 1:
       # noise is -2 stdev
       a[noise] = 2 * self.stdev
-    elif type == 2:
+    elif self.type == 2:
       # gaussian noise with mean=0 variation=1
       a[noise] = np.random.randn(a.shape[0])[noise]
-    elif type == 3:
+    elif self.type == 3:
       # uniform noise sampled over -/+ 2 stdev
       shifted = np.random.rand(a.shape[0]) - 0.5
       a[noise] = (4 * self.stdev * shifted)[noise]
-    elif type == None:
+    elif self.type == None:
       pass
     else:
-      assert False, "illegal noise type: " + str(type)
+      assert False, "illegal noise type: " + str(self.type)
       exit()
 
     # Save a subset of the images for debugging
