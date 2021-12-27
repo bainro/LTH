@@ -71,7 +71,7 @@ class Noise(object):
       # gaussian noise
       np_t = np.random.randn(a.shape[0])[noise]
       # torch tensor
-      t_t = torch.from_numpy(np_t).to(a)
+      t_t = torch.from_numpy(torch.abs(np_t)).to(a)
       a[noise] = t_t
     elif self.type == 3:
       # uniform noise sampled between -/+ 2 stdev
