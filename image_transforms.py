@@ -75,9 +75,9 @@ class Noise(object):
       t_t = torch.from_numpy(np_t).to(a)
       a[noise] = t_t
     elif self.type == 3:
-      # uniform noise sampled over -/+ 2 stdev
-      shifted = np.random.rand(a.shape[0]) - 0.5
-      t_t = torch.from_numpy(4 * self.stdev * shifted).to(a)
+      # uniform noise sampled between 0 & 2 stdev
+      a_np = np.random.rand(a.shape[0])
+      t_t = torch.from_numpy(2 * self.stdev * a_np).to(a)
       a[noise] = t_t[noise]
     elif self.type == None:
       pass
