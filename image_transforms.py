@@ -69,8 +69,7 @@ class Noise(object):
       a[noise] = 0 # 2 * self.stdev
     elif self.type == 2:
       # gaussian noise
-      np_t = np.random.randn(a.shape[0])
-      np_t = (self.stdev * np_t)[noise]
+      np_t = self.stdev * np.random.randn(a.shape[0])[noise]
       # torch tensor
       t_t = torch.from_numpy(torch.abs(np_t)).to(a)
       a[noise] = t_t
