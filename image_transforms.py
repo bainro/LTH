@@ -75,7 +75,7 @@ class Noise(object):
       # uniform noise sampled over -/+ 2 stdev
       shifted = np.random.rand(a.shape[0]) - 0.5
       a[noise] = (4 * self.stdev * shifted)[noise]
-    elif:
+    else:
       assert False, "illegal noise type"
       exit()
 
