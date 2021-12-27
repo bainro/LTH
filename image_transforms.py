@@ -62,7 +62,6 @@ class Noise(object):
     self.iteration += 1
     a = image.view(-1)
     #print("a.shape: ", a.shape)
-    image = image.permute(1, 2, 0)
     #print("image.shape: ", image.shape)
     #exit()
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
@@ -101,6 +100,8 @@ class Noise(object):
         if a.shape[0] == 28*28:
           skimage.io.imsave(outfile, image.view(28,28)) # mnist|fmnist
         else:
+          # CHW -> HWC format
+          image = image.permute(1, 2, 0)
           skimage.io.imsave(outfile, image.view(32,32,3)) # cifar
           exit()
 
