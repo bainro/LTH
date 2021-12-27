@@ -63,8 +63,8 @@ class Noise(object):
     a = image.view(-1)
     #print("a.shape: ", a.shape)
     image = image.permute(1, 2, 0)
-    print("image.shape: ", image.shape)
-    exit()
+    #print("image.shape: ", image.shape)
+    #exit()
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
     
@@ -102,5 +102,6 @@ class Noise(object):
           skimage.io.imsave(outfile, image.view(28,28)) # mnist|fmnist
         else:
           skimage.io.imsave(outfile, image.view(32,32,3)) # cifar
+          exit()
 
     return image
