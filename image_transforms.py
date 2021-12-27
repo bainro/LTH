@@ -53,7 +53,7 @@ class Noise(object):
     self.noiseLevel = noiselevel
     self.stdev = stdev
     self.iteration = 0
-    self.logDir = None
+    self.logDir = logDir
     self.logProbability = logProbability
     self.type = type
 
@@ -63,8 +63,6 @@ class Noise(object):
     a = image.view(-1)
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
-
-    print("a.shape[0]: ", a.shape[0])
     
     if self.type == 0:
       # noise is +2 stdev
