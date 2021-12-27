@@ -71,8 +71,9 @@ class Noise(object):
       a[noise] -= 2 * self.stdev
     elif self.type == 2:
       # gaussian noise with mean=0 variation=1
+      device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
       np_t = np.random.randn(a.shape[0])[noise]
-      a[noise] = torch.tensor(np_t)
+      a[noise] = torch.tensor(np_t).to(device)
     elif self.type == 3:
       # uniform noise sampled over -/+ 2 stdev
       shifted = np.random.rand(a.shape[0]) - 0.5
