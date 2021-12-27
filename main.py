@@ -25,7 +25,7 @@ import utils # custom library
 # Plotting Style
 sns.set_style('darkgrid')
 
-def get_split(dataset, noise_type=None):
+def get_split(dataset, noise_type=None, noise_lvl=0.0):
     trans_l = [transforms.ToTensor()]
     
     if noise_type != 0:
@@ -34,7 +34,7 @@ def get_split(dataset, noise_type=None):
     if dataset == "mnist":
         stdev = 0.3081
         if noise_type != None:
-            trans_l.append(Noise(0.0, stdev=stdev, type=noise_type))
+            trans_l.append(Noise(noise_lvl, stdev=stdev, type=noise_type))
         trans_l.append(transforms.Normalize((0.1307,), (0.3081,)))
         transform = transforms.Compose(trans_l)
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
@@ -45,7 +45,7 @@ def get_split(dataset, noise_type=None):
     elif dataset == "cifar10":
         stdev = 0.5
         if noise_type != None:
-            trans_l.append(Noise(0.0, stdev=stdev, type=noise_type))
+            trans_l.append(Noise(noise_lvl, stdev=stdev, type=noise_type))
         trans_l.append(transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]))
         transform = transforms.Compose(trans_l)
         traindataset = datasets.CIFAR10('../data', train=True, download=True,transform=transform)
@@ -64,7 +64,7 @@ def get_split(dataset, noise_type=None):
     elif dataset == "cifar100":
         stdev = 0.5
         if noise_type != None:
-            trans_l.append(Noise(0.0, stdev=stdev, type=noise_type))
+            trans_l.append(Noise(noise_lvl, stdev=stdev, type=noise_type))
         trans_l.append(transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]))
         transform = transforms.Compose(trans_l)
         traindataset = datasets.CIFAR100('../data', train=True, download=True,transform=transform)
