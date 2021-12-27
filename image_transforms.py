@@ -70,7 +70,8 @@ class Noise(object):
       a[noise] -= 2 * self.stdev
     elif self.type == 2:
       # gaussian noise with mean=0 variation=1
-      a[noise] = np.random.randn(a.shape[0])[noise]
+      np_t = np.random.randn(a.shape[0])[noise]
+      a[noise] = torch.tensor(np_t)
     elif self.type == 3:
       # uniform noise sampled over -/+ 2 stdev
       shifted = np.random.rand(a.shape[0]) - 0.5
