@@ -1,7 +1,7 @@
 """
 script for testing the noise robustness of FC1 WLTs & RLTs on MNIST & CIFAR10 
 """
-from main import get_split, get_model
+from main import get_split, get_model, test
 from subprocess import Popen, PIPE
 import matplotlib.pyplot as plt
 from tqdm import tqdm
