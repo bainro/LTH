@@ -80,6 +80,8 @@ def get_split(dataset, noise_type=None):
     return traindataset, testdataset
 
 def get_model(arch_type):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     if arch_type == "fc1":
        model = fc1.fc1().to(device)
     elif arch_type == "lenet5":
@@ -99,7 +101,6 @@ def get_model(arch_type):
     return model
 
 def main(args, ITE=0):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     reinit = True if args.prune_type=="reinit" else False
 
     traindataset, testdataset = get_split(args.dataset)
