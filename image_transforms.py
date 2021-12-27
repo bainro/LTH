@@ -62,7 +62,7 @@ class Noise(object):
     self.iteration += 1
     a = image.view(-1)
     #print("a.shape: ", a.shape)
-    image = image.permute(2, 0, 1)
+    image = image.permute(1, 2, 0)
     print("image.shape: ", image.shape)
     exit()
     numNoiseBits = int(a.shape[0] * self.noiseLevel)
