@@ -24,7 +24,7 @@ import os
 import numpy as np
 import skimage.io
 
-class RandomNoise(object):
+class Noise(object):
   """
   An image transform that adds noise to random pixels in the image.
   """
