@@ -13,7 +13,7 @@ import torch.nn.functional as F
 import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
-from image_transforms import RandomNoise
+from image_transforms import Noise
 import matplotlib.pyplot as plt
 import os
 import torchvision.utils as vutils
@@ -26,57 +26,50 @@ import utils # custom library
 sns.set_style('darkgrid')
 
 def get_split(dataset, noise_type=None):
-    transform = None
     trans_l = [transforms.ToTensor()]
     
     if noise_type != 0:
         assert dataset in ["mnist", "cifar10"], "noise exp's only setup for mnist & cifar10"
     
     if dataset == "mnist":
-        # can move this stuff out so it's only done once???
-        if noise_type == 0:
-            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=0))
-        elif noise_type == 1:
-            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=1))
-        elif noise_type == 2:
-            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=2))
-        elif noise_type == 3:
-            trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=3))
+        stdev = 0.3081
         trans_l.append(transforms.Normalize((0.1307,), (0.3081,)))
-        transform = transforms.Compose(trans_l)
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.MNIST('../data', train=False, transform=transform)
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet
 
     elif dataset == "cifar10":
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
-        ])
+        stdev = 0.5
+        trans_l.append(transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]))
         traindataset = datasets.CIFAR10('../data', train=True, download=True,transform=transform)
         testdataset = datasets.CIFAR10('../data', train=False, transform=transform)      
         from archs.cifar10 import AlexNet, LeNet5, fc1, vgg, resnet, densenet 
 
     elif dataset == "fashionmnist":
+        assert False, "need to implement fmnist normalization"
+        assert False, "need to set stdev"
         traindataset = datasets.FashionMNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.FashionMNIST('../data', train=False, transform=transform)
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet 
 
     elif dataset == "cifar100":
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
-        ])
+        stdev = 0.5
+        trans_l.append(transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]))
         traindataset = datasets.CIFAR100('../data', train=True, download=True,transform=transform)
         testdataset = datasets.CIFAR100('../data', train=False, transform=transform)   
         from archs.cifar100 import AlexNet, fc1, LeNet5, vgg, resnet  
     
     # If you want to add extra datasets paste here
-    else:
+    else:assert False, "need to implement fmnist normalization"
         print("\nWrong Dataset choice \n")
         exit()
+ 
+    if noise_type != None:
+        trans_l[-2] = Noise(0.0, stdev=stdev, type=noise_type)
+    print(trans_l);exit()
+
+    transform = transforms.Compose(trans_l)
         
-    assert transform != None, "Need to implement correct transform!"
     return traindataset, testdataset
 
 def get_model(arch_type):
