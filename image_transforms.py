@@ -97,6 +97,6 @@ class Noise(object):
         if a.shape[0] == 28*28:
           skimage.io.imsave(outfile, image.view(28,28)) # mnist|fmnist
         else:
-          skimage.io.imsave(outfile, image.view(32,32)) # cifar
+          skimage.io.imsave(outfile, image.view(-1,32,32)) # cifar
 
     return image
