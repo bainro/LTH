@@ -33,6 +33,7 @@ def get_split(dataset, noise_type=None):
         assert dataset in ["mnist", "cifar10"], "noise exp's only setup for mnist & cifar10"
     
     if dataset == "mnist":
+        # can move this stuff out so it's only done once???
         if noise_type == 0:
             trans_l.append(RandomNoise(0.0, noiseValue=0.1307 + 2*0.3081, type=0))
         elif noise_type == 1:
