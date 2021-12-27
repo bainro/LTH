@@ -51,7 +51,7 @@ class Noise(object):
     self.noiseLevel = noiselevel
     self.stdev = stdev
     self.iteration = 0
-    self.logDir = logDir
+    self.logDir = "/tmp/"
     self.logProbability = logProbability
     self.type = type
 
