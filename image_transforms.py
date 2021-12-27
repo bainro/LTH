@@ -69,14 +69,15 @@ class RandomNoise(object):
       # noise is -2 stdev
       a[noise] = -1 * self.noiseValue
     elif type == 2:
-      # gaussian noise sampled from -/+ 2 stdev
-      _tmp = 2 stdev * np.random.randn(a.shape[0])
-      a[noise] = _tmp[noise]
+      # gaussian noise with mean=0 variation=1
+      a[noise] = np.random.randn(a.shape[0])[noise]
     elif type == 3:
-      # uniform noise sampled from -/+ 2 stdev
-      a[noise] = (4 * stdev * (np.random.rand(a.shape[0]) - 0.5))[noise]
+      # uniform noise sampled over -/+ 2 stdev
+      shifted = np.random.rand(a.shape[0]) - 0.5
+      a[noise] = (4 * stdev * shifted)[noise]
     elif:
-      assert False, "illegal noise type"; exit()
+      assert False, "illegal noise type"
+      exit()
 
     # Save a subset of the images for debugging
     if self.logDir is not None:
