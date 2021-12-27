@@ -23,6 +23,7 @@ from __future__ import print_function
 import os
 import numpy as np
 import skimage.io
+import torch
 
 class Noise(object):
   """
