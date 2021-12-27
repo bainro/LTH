@@ -39,6 +39,7 @@ def get_split(dataset, noise_type=None):
         transform = transforms.Compose(trans_l)
         traindataset = datasets.MNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.MNIST('../data', train=False, transform=transform)
+        global AlexNet, LeNet5, fc1, vgg, resnet
         from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet
 
     elif dataset == "cifar10":
@@ -49,6 +50,7 @@ def get_split(dataset, noise_type=None):
         transform = transforms.Compose(trans_l)
         traindataset = datasets.CIFAR10('../data', train=True, download=True,transform=transform)
         testdataset = datasets.CIFAR10('../data', train=False, transform=transform)      
+        global AlexNet, LeNet5, fc1, vgg, resnet, densenet 
         from archs.cifar10 import AlexNet, LeNet5, fc1, vgg, resnet, densenet 
 
     elif dataset == "fashionmnist":
@@ -56,7 +58,8 @@ def get_split(dataset, noise_type=None):
         assert False, "need to set stdev"
         traindataset = datasets.FashionMNIST('../data', train=True, download=True,transform=transform)
         testdataset = datasets.FashionMNIST('../data', train=False, transform=transform)
-        from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet 
+        global AlexNet, LeNet5, fc1, vgg, resnet 
+        from archs.mnist import AlexNet, LeNet5, fc1, vgg, resnet
 
     elif dataset == "cifar100":
         stdev = 0.5
@@ -66,6 +69,7 @@ def get_split(dataset, noise_type=None):
         transform = transforms.Compose(trans_l)
         traindataset = datasets.CIFAR100('../data', train=True, download=True,transform=transform)
         testdataset = datasets.CIFAR100('../data', train=False, transform=transform)   
+        global AlexNet, fc1, LeNet5, vgg, resnet  
         from archs.cifar100 import AlexNet, fc1, LeNet5, vgg, resnet  
     
     # If you want to add extra datasets paste here
