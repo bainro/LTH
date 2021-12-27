@@ -60,7 +60,7 @@ def get_split(dataset, noise_type=None):
         from archs.cifar100 import AlexNet, fc1, LeNet5, vgg, resnet  
     
     # If you want to add extra datasets paste here
-    else:assert False, "need to implement fmnist normalization"
+    else:
         print("\nWrong Dataset choice \n")
         exit()
  
