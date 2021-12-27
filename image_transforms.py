@@ -66,7 +66,7 @@ class Noise(object):
     if self.type == 0:
       a[noise] += 2 * self.stdev
     elif self.type == 1:
-      a[noise] -= 2 * self.stdev
+      a[noise] -= 0 # 2 * self.stdev
     elif self.type == 2:
       # gaussian noise
       np_t = np.random.randn(a.shape[0])[noise]
