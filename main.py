@@ -296,8 +296,6 @@ def train(model, train_loader, optimizer, criterion):
     return train_loss.item()
 
 # Function for Testing
-# @TODO pass in dataset || grab from test_loader to get stdev values!
-# could also just pass it in as well!
 def test(model, test_loader):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.eval()
