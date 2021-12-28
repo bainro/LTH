@@ -64,7 +64,7 @@ class Noise(object):
     noise = np.random.permutation(a.shape[0])[0:numNoiseBits]
     
     if self.type == 0:
-      a[noise] += 2 * self.stdev
+      a[noise] = 2 * self.stdev
     elif self.type == 1:
       a[noise] = 0 # 2 * self.stdev
     elif self.type == 2:
