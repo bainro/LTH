@@ -128,7 +128,6 @@ for noise_type in [0]: #range(4):
         print("noise_lvl: ", noise_lvl)
         trial_sum = 0
         for trial in range(n_repeats):
-            # print("trial #: ", trial)
             logdir = f"{os.getcwd()}/plots/mnist_{noise_type}_{noise_lvl}_{trial}/"
             exists = os.path.exists(logdir)
             if not exists:
@@ -142,7 +141,7 @@ for noise_type in [0]: #range(4):
             # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/0_model_lt.pth.tar")
             
             # WLT ~80% pruned
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/12_model_lt.pth.tar")
+            model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/12_model_lt.pth.tar")
             # RLT ~80% pruned
             # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/12_model_lt.pth.tar")
             
@@ -152,11 +151,10 @@ for noise_type in [0]: #range(4):
             # RLT 96.7% pruned
             # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/26_model_lt.pth.tar")
             
-            accuracy = test(model, test_loader)
-            # print("accuracy: ", accuracy)
+            trial_sum += test(model, test_loader)
             
         avg_acc = trial_sum / n_repeats
-        print("avg trial acc: ", accuracy)
+        print("avg trial acc: ", avg_acc)
     # save 
     
 # (separate script) train single WLT & check for overfitting
