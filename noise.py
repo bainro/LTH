@@ -121,16 +121,23 @@ for dataset in tqdm([]): #datasets):
     # multiple types of noise
     # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
 
-_traindata, testdata = get_split("mnist", noise_type=0, noise_lvl=0.05)
-# less noise_lvl needed for cifar10 to be a similar classification difficulty for human annotators (i.e. me!).
-#_traindata, testdata = get_split("cifar10", noise_type=3, noise_lvl=0.5/3)
-test_loader = torch.utils.data.DataLoader(testdata, batch_size=512, shuffle=False, num_workers=2, drop_last=False)
+for noise_type in range(4):
+    print("===============")
+    print("noise_type: ", noise_type)
+    for noise_lvl in [0, 0.1, 0.2, 0.3, 0.4, 0.5]:
+        print("noise_lvl: ", noise_lvl)
+        for trial in range(n_repeats):
+            print("trial #: ", trial)
+            _traindata, testdata = get_split("mnist", noise_type=noisetype, noise_lvl=noise_lvl)
+            # less noise_lvl needed for cifar10 to be a similar classification difficulty for human annotators (i.e. me!).
+            #_traindata, testdata = get_split("cifar10", noise_type=3, noise_lvl=0.5/3)
+            test_loader = torch.utils.data.DataLoader(testdata, batch_size=512, shuffle=False, num_workers=2, drop_last=False)
 
-# model = get_model("fc1")
-model = torch.load('/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_0/12_model_lt.pth.tar')
-# model.load_state_dict(checkpoint['state_dict'])
-accuracy = test(model, test_loader)
-print("accuracy: ", accuracy)
+            # model = get_model("fc1")
+            model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/12_model_lt.pth.tar")
+            # model.load_state_dict(checkpoint['state_dict'])
+            accuracy = test(model, test_loader)
+            print("accuracy: ", accuracy)
     
 # (separate script) train single WLT & check for overfitting
     # will require spliting training into ""+ validation set
