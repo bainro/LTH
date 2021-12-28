@@ -94,7 +94,8 @@ class Noise(object):
         # works for mnist, fmnist, cifar10|100
         if a.shape[0] == 28*28:
           #try:
-          skimage.io.imsave(outfile, img_as_ubyte(image.view(28,28)))
+          #skimage.io.imsave(outfile, img_as_ubyte(image.view(28,28)))
+          skimage.io.imsave(outfile, image.view(28,28))
           #except ValueError:
           #  print("saving an image exploded, but ignoring :)")
         else:
