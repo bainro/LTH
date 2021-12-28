@@ -22,9 +22,16 @@
 from __future__ import print_function
 import os
 import numpy as np
+import torch
 import skimage.io
 from skimage import img_as_ubyte
-import torch
+import imageio.core.util
+
+# suppress compression warnings on image save
+def ignore_warnings(*args, **kwargs):
+    pass
+
+imageio.core.util._precision_warn = ignore_warnings
 
 class Noise(object):
   """
@@ -93,17 +100,16 @@ class Noise(object):
         
         # works for mnist, fmnist, cifar10|100
         if a.shape[0] == 28*28:
-          #try:
-          #skimage.io.imsave(outfile, img_as_ubyte(image.view(28,28)))
-          skimage.io.imsave(outfile, image.view(28,28))
-          #except ValueError:
-          #  print("saving an image exploded, but ignoring :)")
+          try:
+            skimage.io.imsave(outfile, img_as_ubyte(image.view(28,28)))
+          except ValueError:
+            skimage.io.imsave(outfile, image.view(28,28))
         else:
           # CHW -> HWC format
           _image = image.permute(1, 2, 0)
-          #try:
-          skimage.io.imsave(outfile, img_as_ubyte(_image.view(32,32,3)))
-          #except ValueError:
-          #  print("saving an image exploded, but ignoring :)")
-
+          try:
+            skimage.io.imsave(outfile, img_as_ubyte(_image.view(32,32,3)))
+          except ValueError:
+            skimage.io.imsave(outfile, image.view(32,32,3))
+            
     return image
