@@ -121,7 +121,7 @@ for dataset in tqdm([]): #datasets):
     # multiple types of noise
     # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
 
-for noise_type in range(2,4):
+for noise_type in range(4):
     print("===============")
     print("noise_type: ", noise_type)
     for noise_lvl in [0, 0.1, 0.2, 0.3, 0.4, 0.5]:
