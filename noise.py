@@ -127,8 +127,8 @@ _traindata, testdata = get_split("mnist", noise_type=0, noise_lvl=0.05)
 test_loader = torch.utils.data.DataLoader(testdata, batch_size=512, shuffle=False, num_workers=2, drop_last=False)
 
 model = get_model("fc1")
-checkpoint = torch.load('/home/rbain/git/LTH2/saves/fc1/cifar10/rlt_trial_0/0_model_lt.pth.tar')
-model.load_state_dict(checkpoint['state_dict'])
+model = torch.load('/home/rbain/git/LTH2/saves/fc1/cifar10/rlt_trial_0/0_model_lt.pth.tar')
+# model.load_state_dict(checkpoint['state_dict'])
 accuracy = test(model, test_loader)
 print("accuracy: ", accuracy)
     
