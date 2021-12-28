@@ -138,10 +138,23 @@ for noise_type in [0]: #range(4):
             #_traindata, testdata = get_split("cifar10", noise_type=3, noise_lvl=0.5/3)
             test_loader = torch.utils.data.DataLoader(testdata, batch_size=512, shuffle=False, num_workers=2, drop_last=False)
 
+            # 100% dense
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/0_model_lt.pth.tar")
+            
+            # WLT ~80% pruned
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/12_model_lt.pth.tar")
+            # RLT ~80% pruned
             # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/12_model_lt.pth.tar")
-            model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/0_model_lt.pth.tar")
+            
+            
+            # WLT 96.7% pruned
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/26_model_lt.pth.tar")
+            # RLT 96.7% pruned
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/26_model_lt.pth.tar")
+            
             accuracy = test(model, test_loader)
             # print("accuracy: ", accuracy)
+            
         avg_acc = trial_sum / n_repeats
         print("avg trial acc: ", accuracy)
     # save 
