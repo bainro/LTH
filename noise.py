@@ -138,10 +138,10 @@ for noise_type in [0]: #range(4):
             test_loader = torch.utils.data.DataLoader(testdata, batch_size=512, shuffle=False, num_workers=2, drop_last=False)
 
             # 100% dense
-            model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/0_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/0_model_lt.pth.tar")
             
             # WLT ~80% pruned
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/12_model_lt.pth.tar")
+            model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/12_model_lt.pth.tar")
             # RLT ~80% pruned
             # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/12_model_lt.pth.tar")
             
