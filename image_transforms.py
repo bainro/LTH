@@ -35,7 +35,7 @@ class Noise(object):
                noiselevel=0.0,
                stdev=0.308, # mnist
                type=0,
-               logDir=None, 
+               logdir=None, 
                logProbability=0.01):
     """
     :param noiselevel:
@@ -43,7 +43,7 @@ class Noise(object):
       probability. Can also be set to -2*stdev depending on type.
       Can also be uniformly distributed noise between +/- 2 stdev.
 
-    :param logDir:
+    :param logdir:
       If set to a directory name, then will save a random sample of the images
       to this directory.
 
@@ -54,7 +54,7 @@ class Noise(object):
     self.noiseLevel = noiselevel
     self.stdev = stdev
     self.iteration = 0
-    self.logDir = logDir
+    self.logdir = logdir
     self.logProbability = logProbability
     self.type = type
 
@@ -86,9 +86,9 @@ class Noise(object):
       exit()
 
     # Save a subset of the images for debugging
-    if self.logDir is not None:
+    if self.logdir is not None:
       if np.random.random() <= self.logProbability:
-        outfile = os.path.join(self.logDir,
+        outfile = os.path.join(self.logdir,
                                "im_noise_" + str(int(self.noiseLevel*100)) + "_"
                                + str(self.iteration).rjust(6,'0') + ".png")
         
