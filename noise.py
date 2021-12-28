@@ -126,8 +126,9 @@ for noise_type in range(4):
     print("noise_type: ", noise_type)
     for noise_lvl in [0, 0.1, 0.2, 0.3, 0.4, 0.5]:
         print("noise_lvl: ", noise_lvl)
+        trial_sum = 0
         for trial in range(n_repeats):
-            print("trial #: ", trial)
+            # print("trial #: ", trial)
             logdir = f"{os.getcwd()}/plots/mnist_{noise_type}_{noise_lvl}_{trial}/"
             exists = os.path.exists(logdir)
             if not exists:
@@ -141,7 +142,9 @@ for noise_type in range(4):
             model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/12_model_lt.pth.tar")
             # model.load_state_dict(checkpoint['state_dict'])
             accuracy = test(model, test_loader)
-            print("accuracy: ", accuracy)
+            # print("accuracy: ", accuracy)
+        avg_acc = trial_sum / n_repeats
+        print("avg trial acc: ", accuracy)
     
 # (separate script) train single WLT & check for overfitting
     # will require spliting training into ""+ validation set
