@@ -121,7 +121,7 @@ for dataset in tqdm([]): #datasets):
     # multiple types of noise
     # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
 
-for noise_type in range(4):
+for noise_type in [0]: #range(4):
     print("===============")
     print("noise_type: ", noise_type)
     for noise_lvl in [0, 0.1, 0.2, 0.3, 0.4, 0.5]:
@@ -145,6 +145,7 @@ for noise_type in range(4):
             # print("accuracy: ", accuracy)
         avg_acc = trial_sum / n_repeats
         print("avg trial acc: ", accuracy)
+    # save 
     
 # (separate script) train single WLT & check for overfitting
     # will require spliting training into ""+ validation set
