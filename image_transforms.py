@@ -67,13 +67,12 @@ class Noise(object):
     if self.type == 0:
       a[noise] = 2 * self.stdev
     elif self.type == 1:
-      a[noise] = 0 # 2 * self.stdev
+      a[noise] = 0
     elif self.type == 2:
       # gaussian noise
       g_n = self.stdev * torch.randn(a.shape[0])[noise]
-      # torch tensor
-      t_t = torch.abs(g_n).to(a)
-      a[noise] = t_t
+      _t = torch.abs(g_n).to(a)
+      a[noise] = _t
     elif self.type == 3:
       # uniform noise sampled between -/+ 2 stdev
       uni_n = np.random.rand(a.shape[0])
@@ -94,16 +93,16 @@ class Noise(object):
         
         # works for mnist, fmnist, cifar10|100
         if a.shape[0] == 28*28:
-          try:
-            skimage.io.imsave(outfile, img_as_ubyte(image.view(28,28)))
-          except ValueError:
-            print("saving an image exploded, but ignoring :)")
+          #try:
+          skimage.io.imsave(outfile, img_as_ubyte(image.view(28,28)))
+          #except ValueError:
+          #  print("saving an image exploded, but ignoring :)")
         else:
           # CHW -> HWC format
           _image = image.permute(1, 2, 0)
-          try:
-            skimage.io.imsave(outfile, img_as_ubyte(_image.view(32,32,3)))
-          except ValueError:
-            print("saving an image exploded, but ignoring :)")
+          #try:
+          skimage.io.imsave(outfile, img_as_ubyte(_image.view(32,32,3)))
+          #except ValueError:
+          #  print("saving an image exploded, but ignoring :)")
 
     return image
