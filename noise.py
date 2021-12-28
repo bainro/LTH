@@ -153,7 +153,7 @@ for noise_type in [0]: #range(4):
             # WLT 96.7% pruned
             # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/wlt_trial_{trial}/26_model_lt.pth.tar")
             # RLT 96.7% pruned
-            model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/26_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/mnist/rlt_trial_{trial}/26_model_lt.pth.tar")
             
             trial_sum += test(model, test_loader)
             
