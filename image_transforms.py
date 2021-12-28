@@ -23,6 +23,7 @@ from __future__ import print_function
 import os
 import numpy as np
 import skimage.io
+from skimage import img_as_ubyte
 import torch
 
 class Noise(object):
@@ -93,7 +94,7 @@ class Noise(object):
         
         # works for mnist, fmnist, cifar10|100
         if a.shape[0] == 28*28:
-          skimage.io.imsave(outfile, image.view(28,28))
+          skimage.io.imsave(outfile, img_as_ubyte(image.view(28,28)))
         else:
           # CHW -> HWC format
           _image = image.permute(1, 2, 0)
