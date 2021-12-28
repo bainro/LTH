@@ -128,7 +128,7 @@ for noise_type in range(4):
         print("noise_lvl: ", noise_lvl)
         for trial in range(n_repeats):
             print("trial #: ", trial)
-            logdir = f"{os.getcwd()}/plots/mnist_{noise_type}_{noise_level}_{trial}/"
+            logdir = f"{os.getcwd()}/plots/mnist_{noise_type}_{noise_lvl}_{trial}/"
             _traindata, testdata = get_split("mnist", noise_type=noise_type, noise_lvl=noise_lvl, logdir=logdir)
             # less noise_lvl needed for cifar10 to be a similar classification difficulty for human annotators (i.e. me!).
             #_traindata, testdata = get_split("cifar10", noise_type=3, noise_lvl=0.5/3)
