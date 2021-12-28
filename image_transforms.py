@@ -35,7 +35,7 @@ class Noise(object):
                noiselevel=0.0,
                stdev=0.308, # mnist
                type=0,
-               logDir="/tmp", 
+               logDir=None, 
                logProbability=0.01):
     """
     :param noiselevel:
