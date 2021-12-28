@@ -98,6 +98,6 @@ class Noise(object):
         else:
           # CHW -> HWC format
           _image = image.permute(1, 2, 0)
-          skimage.io.imsave(outfile, _image.view(32,32,3))
+          skimage.io.imsave(outfile, img_as_ubyte(_image.view(32,32,3)))
 
     return image
