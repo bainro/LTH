@@ -185,7 +185,7 @@ def main(args, ITE=0):
                     model.apply(weight_init)
                     step = 0
                     for name, param in model.named_parameters():
-                        if 'weight' in name:
+                        if 'weight' in name and 'classifier' in name:
                             weight_dev = param.device
                             param.data = torch.from_numpy(param.data.cpu().numpy() * mask[step]).to(weight_dev)
                             step = step + 1
@@ -286,7 +286,7 @@ def train(model, train_loader, optimizer, criterion):
         # Freezing Pruned weights by making their gradients Zero
         # https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch/issues/10
         for name, p in model.named_parameters():
-            if 'weight' in name:
+            if 'weight' in name and 'classifier' in name:
                 tensor = p.data
                 grad_tensor = p.grad
                 grad_tensor = torch.where(tensor.abs() < EPS, torch.zeros_like(grad_tensor), grad_tensor)
@@ -323,7 +323,7 @@ def prune_by_percentile(percent, reinit=False,**kwargs):
         for name, param in model.named_parameters():
 
             # We do not prune bias term
-            if 'weight' in name:
+            if 'weight' in name and 'classifier' in name:
                 tensor = param.data.cpu().numpy()
                 alive = tensor[np.nonzero(tensor)] # flattened array of nonzero values
                 percentile_value = np.percentile(abs(alive), percent)
@@ -344,14 +344,12 @@ def make_mask(model, percent=None):
     global mask
     step = 0
     for name, param in model.named_parameters(): 
-        print("name: ", name)
-        if 'weight' in name:
+        if 'weight' in name and 'classifier' in name:
             step = step + 1
-    exit()
     mask = [None]* step 
     step = 0
     for name, param in model.named_parameters(): 
-        if 'weight' in name:
+        if 'weight' in name and 'classifier' in name:
             tensor = param.data.cpu().numpy()
             mask[step] = np.ones_like(tensor)
             if percent != None:
@@ -372,7 +370,7 @@ def original_initialization(mask_temp, initial_state_dict):
     
     step = 0
     for name, param in model.named_parameters(): 
-        if "weight" in name: 
+        if "weight" in name and 'classifier' in name: 
             weight_dev = param.device
             param.data = torch.from_numpy(mask_temp[step] * initial_state_dict[name].cpu().numpy()).to(weight_dev)
             step = step + 1
