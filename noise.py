@@ -22,7 +22,7 @@ prune_iterations = 35
 datasets = ["mnist", "cifar10"]
 processes = list()
 N = 6 # number of || processes
-n_repeats = 7
+n_repeats = 8
 q_l = []
 
 '''
