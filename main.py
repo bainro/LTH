@@ -344,8 +344,10 @@ def make_mask(model, percent=None):
     global mask
     step = 0
     for name, param in model.named_parameters(): 
+        print("name: ", name)
         if 'weight' in name:
             step = step + 1
+    exit()
     mask = [None]* step 
     step = 0
     for name, param in model.named_parameters(): 
