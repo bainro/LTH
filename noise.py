@@ -21,26 +21,26 @@ DPI = 1200
 prune_iterations = 35
 datasets = ["mnist", "cifar10"]
 processes = list()
-N = 6
-n_repeats = 8
+N = 6 # number of || processes
+n_repeats = 11 # 8
 q_l = []
 
-'''
+#'''
 for trial in range(n_repeats):
     exp_name = "trial_" + str(trial)
-    cmd = "python main.py --dataset cifar10 --arch_type fc1 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
+    #cmd = "python main.py --dataset cifar10 --arch_type fc1 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
+    #cmd += "wlt_" + exp_name
+    #q_l.append(['/bin/bash', '-c', cmd])
+    cmd = "python main.py --dataset mnist --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
     cmd += "wlt_" + exp_name
     q_l.append(['/bin/bash', '-c', cmd])
-    cmd = "python main.py --dataset mnist --arch_type fc1 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
-    cmd += "wlt_" + exp_name
-    q_l.append(['/bin/bash', '-c', cmd])
-    cmd = "python main.py --dataset cifar10 --arch_type fc1 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --rlt --exp_name "
+    #cmd = "python main.py --dataset cifar10 --arch_type fc1 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --rlt --exp_name "
+    #cmd += "rlt_" + exp_name
+    #q_l.append(['/bin/bash', '-c', cmd])
+    cmd = "python main.py --dataset mnist --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --rlt --exp_name "
     cmd += "rlt_" + exp_name
     q_l.append(['/bin/bash', '-c', cmd])
-    cmd = "python main.py --dataset mnist --arch_type fc1 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --rlt --exp_name "
-    cmd += "rlt_" + exp_name
-    q_l.append(['/bin/bash', '-c', cmd])
-'''
+#'''
 
 # keeps 2 training threads per gpu
 done_i = None
@@ -70,8 +70,8 @@ for i, process in enumerate(q_l):
             else:
                 # set so the cpu can chill
                 time.sleep(0.5)
-                
-# avg of n_repeat (eg 10) tickets. Sparsity vs acc with WLT + RLT on MNIST + CIFAR10
+        
+# avg of n_repeat (eg 8) tickets. Sparsity vs acc with WLT + RLT on MNIST + CIFAR10
 for dataset in tqdm([]): #datasets):
     dump_dir = f"{os.getcwd()}/dumps/lt/fc1/{dataset}/"
     
@@ -121,6 +121,7 @@ for dataset in tqdm([]): #datasets):
     # multiple types of noise
     # sparsity vs noise score for RLT + WLT on MNIST + CIFAR10
 
+exit()
 for noise_type in [0]: #range(4):
     print("===============")
     print("noise_type: ", noise_type)
