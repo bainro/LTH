@@ -73,7 +73,7 @@ for i, process in enumerate(q_l):
         
 # avg of n_repeat (eg 8) tickets. Sparsity vs acc with WLT + RLT on MNIST + CIFAR10
 for dataset in datasets: # tqdm([]):
-    dump_dir = f"{os.getcwd()}/dumps/lt/fc1/{dataset}/"
+    dump_dir = f"{os.getcwd()}/dumps/lt/lenet5/{dataset}/"
     
     a = np.arange(prune_iterations)
     
@@ -106,7 +106,7 @@ for dataset in datasets: # tqdm([]):
     
     plt.plot(a, avg_b, c="blue", label="Random tickets") 
     plt.plot(a, avg_c, c="red", label="Winning tickets") 
-    plt.title(f"Test Accuracy vs Weights % (FC1 | {dataset})") 
+    plt.title(f"Test Accuracy vs Weights % (LeNet5 | {dataset})") 
     plt.xlabel("Weights %") 
     plt.ylabel("Test accuracy") 
     plt.xticks(a, d, rotation="vertical") 
