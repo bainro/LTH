@@ -22,10 +22,10 @@ prune_iterations = 35
 datasets = ["mnist", "cifar10"]
 processes = list()
 N = 6 # number of || processes
-n_repeats = 11 # 8
+n_repeats = 7
 q_l = []
 
-#'''
+'''
 for trial in range(n_repeats):
     exp_name = "trial_" + str(trial)
     #cmd = "python main.py --dataset cifar10 --arch_type fc1 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --exp_name "
@@ -40,7 +40,7 @@ for trial in range(n_repeats):
     cmd = "python main.py --dataset mnist --arch_type lenet5 --end_iter 35 --last_iter_epochs 35 --batch_size 200 --rlt --exp_name "
     cmd += "rlt_" + exp_name
     q_l.append(['/bin/bash', '-c', cmd])
-#'''
+'''
 
 # keeps 2 training threads per gpu
 done_i = None
@@ -114,7 +114,7 @@ for dataset in tqdm([]): #datasets):
     plt.legend() 
     plt.grid(color="gray") 
 
-    plt.savefig(f"{os.getcwd()}/plots/lt/fc1/{dataset}/avg_over_{n_repeats}_trials.png", dpi=DPI, bbox_inches='tight') 
+    plt.savefig(f"{os.getcwd()}/plots/lt/lenet5/{dataset}/avg_over_{n_repeats}_trials.png", dpi=DPI, bbox_inches='tight') 
     plt.close()
         
 # load each checkpoint & do noisy testing
