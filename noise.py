@@ -72,7 +72,7 @@ for i, process in enumerate(q_l):
                 time.sleep(0.5)
         
 # avg of n_repeat (eg 8) tickets. Sparsity vs acc with WLT + RLT on MNIST + CIFAR10
-for dataset in tqdm([]): #datasets):
+for dataset in datasets): # tqdm([]):
     dump_dir = f"{os.getcwd()}/dumps/lt/fc1/{dataset}/"
     
     a = np.arange(prune_iterations)
