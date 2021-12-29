@@ -125,32 +125,32 @@ for noise_type in [0]: #range(4):
         print("noise_lvl: ", noise_lvl)
         trial_sum = 0
         for trial in range(n_repeats):
-            logdir = f"{os.getcwd()}/plots/cifar10_{noise_type}_{noise_lvl}_{trial}/"
+            logdir = f"{os.getcwd()}/plots/mnist_lenet5_{noise_type}_{noise_lvl}_{trial}/"
             exists = os.path.exists(logdir)
             if not exists:
                   os.makedirs(logdir)
-            #_traindata, testdata = get_split("cifar10", noise_type=noise_type, noise_lvl=noise_lvl, logdir=logdir)
+            _traindata, testdata = get_split("mnist", noise_type=noise_type, noise_lvl=noise_lvl, logdir=logdir)
             # less noise_lvl needed for cifar10 to be a similar classification difficulty for human annotators (i.e. me!).
-            _traindata, testdata = get_split("cifar10", noise_type=noise_type, noise_lvl=noise_lvl/3)
+            #_traindata, testdata = get_split("cifar10", noise_type=noise_type, noise_lvl=noise_lvl/3)
             test_loader = torch.utils.data.DataLoader(testdata, batch_size=512, shuffle=False, num_workers=2, drop_last=False)
 
             # 100% dense
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/cifar10/wlt_trial_{trial}/0_model_lt.pth.tar")
+            model = torch.load(f"/home/rbain/git/LTH2/saves/lenet5/mnist/wlt_trial_{trial}/0_model_lt.pth.tar")
             
             # WLT ~80% pruned
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/cifar10/wlt_trial_{trial}/12_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/lenet5/mnist/wlt_trial_{trial}/12_model_lt.pth.tar")
             # RLT ~80% pruned
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/cifar10/rlt_trial_{trial}/12_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/lenet5/mnist/rlt_trial_{trial}/12_model_lt.pth.tar")
 
             # WLT ~70% pruned
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/cifar10/wlt_trial_{trial}/9_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/lenet5/mnist/wlt_trial_{trial}/9_model_lt.pth.tar")
             # RLT ~70% pruned
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/cifar10/rlt_trial_{trial}/9_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/lenet5/mnist/rlt_trial_{trial}/9_model_lt.pth.tar")
             
             # WLT 96.7% pruned
-            model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/cifar10/wlt_trial_{trial}/26_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/lenet5/mnist/wlt_trial_{trial}/26_model_lt.pth.tar")
             # RLT 96.7% pruned
-            # model = torch.load(f"/home/rbain/git/LTH2/saves/fc1/cifar10/rlt_trial_{trial}/26_model_lt.pth.tar")
+            # model = torch.load(f"/home/rbain/git/LTH2/saves/lenet5/mnist/rlt_trial_{trial}/26_model_lt.pth.tar")
             
             trial_sum += test(model, test_loader)
             
