@@ -37,13 +37,6 @@ python3 main.py --prune_type=lt --arch_type=fc1 --dataset=mnist --prune_percent=
 - `--gpu`	: Decide Which GPU the program should use 
 	- Default : `0`
 
-## How to combine the plots of various `prune_type` ?
-- Go to `combine_plots.py` and add/remove the datasets/archs who's combined plot you want to generate (*Assuming that you have already executed the `main.py` code for those dataset/archs and produced the weights*).
-- Run `python3 combine_plots.py`.
-- Go to `/plots/lt/combined_plots/` to see the graphs.
-
-Kindly [raise an issue](https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch/issues) if you have any problem with the instructions. 
-
 ## Interesting papers that are related to Lottery Ticket Hypothesis which I enjoyed 
 - [Deconstructing Lottery Tickets: Zeros, Signs, and the Supermask](https://eng.uber.com/deconstructing-lottery-tickets/)
 
