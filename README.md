@@ -1,8 +1,6 @@
 # Lottery Ticket Hypothesis in Pytorch 
 
 This repository contains a **Pytorch** implementation of the paper [The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks](https://arxiv.org/abs/1803.03635) by [Jonathan Frankle](https://github.com/jfrankle) and [Michael Carbin](https://people.csail.mit.edu/mcarbin/) that can be **easily adapted to any model/dataset**.
-
-This is not my work, this is a lazy man's fork of the repo here: https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch. I've added some features though, not just a simple copy and paste.
 		
 ## Requirements
 ```
@@ -38,6 +36,7 @@ python3 main.py --prune_type=lt --arch_type=fc1 --dataset=mnist --prune_percent=
 	- Default : `1`
 - `--gpu`	: Decide Which GPU the program should use 
 	- Default : `0`
+
 ## How to combine the plots of various `prune_type` ?
 - Go to `combine_plots.py` and add/remove the datasets/archs who's combined plot you want to generate (*Assuming that you have already executed the `main.py` code for those dataset/archs and produced the weights*).
 - Run `python3 combine_plots.py`.
