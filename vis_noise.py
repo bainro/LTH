@@ -21,8 +21,8 @@ for i, noise_lvl in enumerate(noise_lvls):
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
                              
     for _, (img, target) in enumerate(test_loader):
-        if i != 10 and i != 29: 
+        if _ != 10 and _ != 29: 
             continue
-        if i > 29: 
+        if _ > 29: 
             break
         save_image(img, f"cifar10_{i}_{_}.png")
