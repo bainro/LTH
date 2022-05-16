@@ -13,8 +13,11 @@ noise_lvls = [0, 0.1, 0.2, 0.3, 0.4, 0.5]
 # i.e. a value corresponding to near white / full intensity
 two_sd = 0
 
-for i, noise_lvl in enumerate(noise_lvls): # 10
-    if i > 0: break
+for i, noise_lvl in enumerate(noise_lvls):
+    if i != 10 and i != 29: 
+        continue
+    if i > 29: 
+        break
     # _, test_data = get_split("mnist", noise_type=two_sd, noise_lvl=noise_lvl)
     
     # less noise_lvl needed for cifar10 to be a similar classification difficulty for human a>
@@ -22,6 +25,4 @@ for i, noise_lvl in enumerate(noise_lvls): # 10
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
                              
     for _, (img, target) in enumerate(test_loader):
-        if _ > 20:
-            save_image(img, f"cifar10_{i}_{_}.png")
-        if _ == 35: break
+        save_image(img, f"cifar10_{i}_{_}.png")
