@@ -14,6 +14,7 @@ noise_lvls = [0, 0.1, 0.2, 0.3, 0.4, 0.5]
 two_sd = 0
 
 for i, noise_lvl in enumerate(noise_lvls):
+    if i > 0: break
     # _, test_data = get_split("mnist", noise_type=two_sd, noise_lvl=noise_lvl)
     
     # less noise_lvl needed for cifar10 to be a similar classification difficulty for human a>
@@ -21,5 +22,6 @@ for i, noise_lvl in enumerate(noise_lvls):
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
                              
     for _, (img, target) in enumerate(test_loader):
-        save_image(img, f"cifar10_{i}_{_}.png")
-        if _ == 5: break
+        if _ > 5:
+            save_image(img, f"cifar10_{i}_{_}.png")
+        if _ == 20: break
