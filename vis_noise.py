@@ -21,5 +21,5 @@ for i, noise_lvl in enumerate(noise_lvls):
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
                              
     for _, (img, target) in enumerate(test_loader):
-        save_image(img, f"mnist_{i}.png")
+        save_image(img, f"cifar10_{i}.png")
         if _ == 1: break
