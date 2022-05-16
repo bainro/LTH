@@ -13,15 +13,15 @@ noise_lvls = [0, 0.1, 0.2, 0.3, 0.4, 0.5]
 # i.e. a value corresponding to near white / full intensity
 two_sd = 0
 
-for noise_lvl in noise_lvls:
+for i, noise_lvl in enumerate(noise_lvls):
     _, test_data = get_split("mnist", noise_type=two_sd, noise_lvl=noise_lvl)
     
     # less noise_lvl needed for cifar10 to be a similar classification difficulty for human a>
     # _, test_data = get_split("cifar10", noise_type=two_sd, noise_lvl=noise_lvl/3)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False, num_workers=2, drop_last=False)
                              
-    for i, (img, target) in enumerate(test_loader):
+    for img, target in test_loader:
         print("target", target)
         print("img tensor shape", img.shape)
         save_image(img, f"mnist_{i}.png")
-        
+        break
