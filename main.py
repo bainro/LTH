@@ -46,8 +46,8 @@ def get_split(dataset, noise_type=None, noise_lvl=0.0, logdir=None):
         stdev = 0.5
         if noise_type != None:
             trans_l.append(Noise(noise_lvl, stdev=stdev, type=noise_type, logdir=logdir))
-        #trans_l.append(transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]))
-        trans_l.append(transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)))
+        # trans_l.append(transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]))
+        # trans_l.append(transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)))
         transform = transforms.Compose(trans_l)
         traindataset = datasets.CIFAR10('../data', train=True, download=True,transform=transform)
         testdataset = datasets.CIFAR10('../data', train=False, transform=transform)      
