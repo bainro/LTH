@@ -20,8 +20,8 @@ for i, noise_lvl in enumerate(noise_lvls):
     # _, test_data = get_split("cifar10", noise_type=two_sd, noise_lvl=noise_lvl/3)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False, num_workers=2, drop_last=False)
                              
-    for img, target in test_loader:
+    for _, (img, target) in enumerate(test_loader):
         print("target", target)
         print("img tensor shape", img.shape)
         save_image(img, f"mnist_{i}.png")
-        break
+        if _ == 1: break
